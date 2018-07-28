@@ -22,9 +22,7 @@ function showAllLandMarks() {
 
 function mapInitialization(landmarks) {
   var mapOptions = {
-    mapTypeId : google.maps.MapTypeId.ROADMAPcenter, 
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8 	
+    mapTypeId : google.maps.MapTypeId.ROADMAPcenter
   };
 
   // Render the map within the empty div

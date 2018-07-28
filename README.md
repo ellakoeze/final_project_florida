@@ -18,7 +18,6 @@ create table landmarks (
 	long float,
 	user_created int references person(id),
 	user_saved int,
-	geom geometry(Point, 6439),
 	notes varchar(240)
 );
 ```
