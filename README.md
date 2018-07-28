@@ -2,16 +2,35 @@
 
 Create a new database named `final_project_florida` and install the postgis extension. 
 
-cd into the data folder and for each shapefile in the data folder run the following command in a command shell:  
+Run the following commands: 
 
-`shp2pgsql -s 6439  file_name > newname.sql`
+`create type landmark as enum('Beach','airport','Hotel','amusement','campground', 'golf_course', 'nationa_forest_fed_land', 'national_park','shopping_center','state_local_park','other');`
 
-file_name        | newname
----------------- | ---------
-`airports_2015`  | airports
-`beachwtr_feb16` | beaches
-`gc_hotels_aug16`| hotels
 
-And then load each one into the database:
+`create table person (id bigserial primary key, first_name varchar(64) not null, last_name varchar(64) not null, email varchar(128) );`
 
-`psql -d final_project_florida -U postgres -f newname.sql`
+```
+create table landmarks (
+	id bigserial primary key,
+	name varchar(128),
+	type landmark,
+	lat float,
+	long float,
+	user_created int references person(id),
+	user_saved int,
+	geom geometry(Point, 6439),
+	notes varchar(240)
+);
+```
+
+```
+COPY landmarks(name,type,lat,long, user_created, user_saved)
+FROM '[PATH TO DATA]/landmarks.csv' DELIMITER ',' CSV HEADER; 
+```
+
+
+```
+UPDATE landmarks
+SET geom = ST_SetSRID(ST_MakePoint(landmarks.lat,landmarks.long),6439);
+```
+
