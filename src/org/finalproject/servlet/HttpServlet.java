@@ -76,21 +76,16 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 			response) throws JSONException, SQLException, IOException {
 			JSONArray list = new JSONArray();
 			DBUtility dbutil = new DBUtility();
-			String sql;
-			if(request.getParameter("type") != null) {
-				String landmarkType = request.getParameter("type");
-				sql = "select type from landmarks where type='"+landmarkType+"' LIMIT 1";
-			}
-			//query is happening here
-			else sql = "select * from landmarks";
+			String sql = "select * from landmarks";
 			ResultSet res = dbutil.queryDB(sql);
-			if (res.next()) {
+			while (res.next()) {
 				// add to response
 				HashMap<String, String> m = new HashMap<String,String>();
 				m.put("type:", res.getString("type"));
+				m.put("longitude", res.getString("long"));
+				m.put("latitude", res.getString("lat"));
 				list.put(m);
 			}
-			
 			
 			response.getWriter().write(list.toString());
 	}

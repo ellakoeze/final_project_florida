@@ -14,26 +14,7 @@
 <body>
  <div id="map-canvas"></div>
 <script src="js/loadmap.js"></script> 
-<script>
-	window.onload = tests();
-	function tests() {
-		test_query_report();
-	}
 
-	function test_query_report() {
-		$.ajax({
-	  	 	url: 'HttpServlet',
-	   	 	type: 'POST',
-	    	data: { "tab_id": "1", "type": "golf_course"},
-	    	success: function(data){ 
-	    		alert('there are golf courses');
-	    	},
-	    	error: function(xhr, status, error) {
-		    	alert("An AJAX error occured: " + status + "\nError: " + error);
-		  	}
-		});
-	} 
-</script>
 
 </body>
 </html>

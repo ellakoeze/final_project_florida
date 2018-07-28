@@ -3,8 +3,7 @@ var map;
 
 
 function initialization() {
-//  showAllLandMarks();
-  mapInitialization('tk');
+  showAllLandMarks();
 }
 
 function showAllLandMarks() {
@@ -27,28 +26,28 @@ function mapInitialization(landmarks) {
     center: {lat: -34.397, lng: 150.644},
     zoom: 8 	
   };
-  
+
   // Render the map within the empty div
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   
-//  var bounds = new google.maps.LatLngBounds ();
-//  
-//  $.each(landmarks, function(i, e) {
-//    var long = Number(e['long']);
-//    var lat = Number(e['lat']);
-//    var latlng = new google.maps.LatLng(lat, long); 
-//    
-//    bounds.extend(latlng);
-//
-//    // Create the marker
-//    var marker = new google.maps.Marker({ // Set the marker
-//      position : latlng, // Position marker to coordinates
-//      map : map, // assign the market to our map variable
-//    });
-//    
-//  });
-//  
-//  map.fitBounds (bounds);
+  var bounds = new google.maps.LatLngBounds ();
+  
+  $.each(landmarks, function(i, e) {
+    var long = Number(e['longitude']);
+    var lat = Number(e['latitude']);
+    var latlng = new google.maps.LatLng(lat, long); 
+    
+    bounds.extend(latlng);
+
+    // Create the marker
+    var marker = new google.maps.Marker({ // Set the marker
+      position : latlng, // Position marker to coordinates
+      map : map, // assign the market to our map variable
+    });
+    
+  });
+  
+  map.fitBounds (bounds);
 
 }
 

@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class DBUtility {
 	private static final String Driver = "org.postgresql.Driver";
 	private static final String ConnUrl = "jdbc:postgresql://localhost:5432/final_project_florida";
-	private static final String Username = "ellakoeze";
+	private static final String Username = "postgres";
 	private static final String Password = "";
 	
 	// This is a constructor
