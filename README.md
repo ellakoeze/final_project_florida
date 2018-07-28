@@ -28,9 +28,3 @@ COPY landmarks(name,type,lat,long, user_created, user_saved)
 FROM '[PATH TO DATA]/landmarks.csv' DELIMITER ',' CSV HEADER; 
 ```
 
-
-```
-UPDATE landmarks
-SET geom = ST_SetSRID(ST_MakePoint(landmarks.lat,landmarks.long),6439);
-```
-
