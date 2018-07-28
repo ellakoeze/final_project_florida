@@ -49,7 +49,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 //		if (tab_id.equals("0")) {
 //			System.out.println("A report is submitted!");
 //			try {
-//				//where we will eventually create landmarks
+//				//where we will eventually call the create here
 //			} catch (SQLException e) {
 //				e.printStackTrace();
 //			}
@@ -77,13 +77,17 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 			JSONArray list = new JSONArray();
 			DBUtility dbutil = new DBUtility();
 			String landmarkType = request.getParameter("type");
-			String sql = "select * from landmarks where landmarks.type=" + landmarkType;
+			//query is happening here
+			String sql = "select type from landmarks where type='"+landmarkType+"' LIMIT 1";
 			ResultSet res = dbutil.queryDB(sql);
 			while (res.next()) {
 				// add to response
 				HashMap<String, String> m = new HashMap<String,String>();
+				m.put("type:", res.getString("type"));
 				list.put(m);
 			}
+			
+			
 			response.getWriter().write(list.toString());
 	}
 	
