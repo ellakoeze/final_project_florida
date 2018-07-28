@@ -60,7 +60,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 		// query reports
 		if (tab_id.equals("1")) {
 			try {
-				queryLandmarks(request, response);
+					queryLandmarks(request, response);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -84,7 +84,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 			//query is happening here
 			else sql = "select * from landmarks";
 			ResultSet res = dbutil.queryDB(sql);
-			while (res.next()) {
+			if (res.next()) {
 				// add to response
 				HashMap<String, String> m = new HashMap<String,String>();
 				m.put("type:", res.getString("type"));
