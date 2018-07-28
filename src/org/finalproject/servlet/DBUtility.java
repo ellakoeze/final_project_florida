@@ -37,7 +37,6 @@ public class DBUtility {
 			if (conn != null) {
 				Statement stmt = conn.createStatement();
 				res = stmt.executeQuery(sql);
-				System.out.println(res.getString("type"));
 				conn.close();
 			}
 		} catch (Exception e) {
