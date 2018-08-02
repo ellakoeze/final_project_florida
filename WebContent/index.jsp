@@ -11,8 +11,11 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" href="css/styles.css">
 
-  
-  <!-- Google Map js libraries-->
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+ <!-- Google Map js libraries-->
 <link href="https://fonts.googleapis.com/css?family=Prosto+One" rel="stylesheet">
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyDsdX71tmUJbIGSvUq2yjUircdJbtd1KdI&signed_in=true&libraries=places,visualization"></script>
 
@@ -26,6 +29,7 @@
       </div>
   </div>
 </nav>
+
 <!-- Legend (Kristen) -->
 <div class="container">
 <div id="draggable" class="ui-widget-content">
