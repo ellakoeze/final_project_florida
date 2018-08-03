@@ -37,11 +37,6 @@
 
 var map;
 
-//need for draggable legend (Kristen)
-$( function() {
-    $( "#draggable" ).draggable();
-  } );
-
 function initialization() {
 	showAllLandMarks();
 }
@@ -119,8 +114,16 @@ var marker = new google.maps.Marker({ // Set the marker
   map : map, // assign the market to our map variable
   //customInfo: contentStr, //content strings in above in the commented code above 
 }); //end of marker VAR
-	
 
+var legend = document.getElementById('legend');
+for (var key in icons) {
+  var type = icons[key];
+  var name = type.name;
+  var icon = type.icon;
+  var div = document.createElement('div');
+  div.innerHTML = '<img src="' + icon + '"> ' + name;
+  legend.appendChild(div);
+}
 
 // Add a Click Listener to the marker
 google.maps.event.addListener(marker, 'click', function() { 
@@ -139,7 +142,6 @@ google.maps.event.addListener(marker, 'click', function() {
 
 //Execute our 'initialization' function once the page has loaded.
 google.maps.event.addDomListener(window, 'load', initialization);
-
 
 
 
