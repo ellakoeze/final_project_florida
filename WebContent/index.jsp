@@ -25,6 +25,9 @@
 <nav class="navbar navbar-default">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Florida Vacation Planner</a>
+      <!-- I think this needs to be added for the legend to get he correct landmark -->
+      <select onchange="onSelectReportType(this)" name="type">
+      
       </div>
 </nav>
 

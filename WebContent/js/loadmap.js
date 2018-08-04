@@ -7,19 +7,26 @@
  * 1. View All POIS
  * -- UP AND RUNNING E.K. created initial project 
  * 
+ * 
  * 2. USER ADD THEIR OWN POI
  * -add marker feature will 
  * -- -- GUI NEEDED (Boot strap window)
  * -- -- Click and add marker with necessary info?
+ * build on the Create Report and tweak it to 
+ * Submit the landmark code
+ * need to look into 
+ * 
  * 
  * 3. TOGGLE POI ON/OFF
  * -- K.W. working on that 
+ * --S.G. helping? kind of..
  * 
  * 4. USER SAVES PLACES THEY SELECT
  * -- https://stackoverflow.com/questions/28975015/google-maps-api-v3-0-saving-a-reference-to-a-marker // could hep to save markers user clicks
  * -- https://www.youtube.com/watch?v=q2VV3-yWupU
  * 
- * 5. USER EXPORTS THOSE SAVES PLACES
+ * 5. USER EXPORTS THOSE SAVES PLACES 
+ * --shoop baby shoop
  * -- best to take the array that it's in and export it as a csv 
  * -- -- https://medium.com/@danny.pule/export-json-to-csv-file-using-javascript-a0b7bc5b00d2
  * -- -- https://gist.github.com/dannypule/48418b4cd8223104c6c92e3016fc0f61 
@@ -79,7 +86,7 @@ var icons = {
 $.each(landmarks, function(i, e) {
     var long = Number(e['longitude']);
     var lat = Number(e['latitude']);
-    //var landmarkType=e['']; // landmarkType empty string should be the string in the name var in index.jsp 
+    //var landmarkType=e['type']; // landmarkType empty string should be the string in the name var in index.jsp 
     var latlng = new google.maps.LatLng(lat, long);     
     bounds.extend(latlng);
     
@@ -110,7 +117,7 @@ $.each(landmarks, function(i, e) {
 // Create the marker
 var marker = new google.maps.Marker({ // Set the marker
   position : latlng, // Position marker to coordinates
-  //icon: icons[landmarks].icon, //update icon image 
+  //icon: icons[landmarkType].icon, //update icon image 
   map : map, // assign the market to our map variable
   //customInfo: contentStr, //content strings in above in the commented code above 
 }); //end of marker VAR
