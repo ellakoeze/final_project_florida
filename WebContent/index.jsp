@@ -12,8 +12,7 @@
 <link rel="stylesheet" href="css/styles.css">
 
 <!-- jQuery -->
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
 
  <!-- Google Map js libraries-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -38,10 +37,14 @@
 </div>
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="js/loadmap.js"></script> 
 
 </body>
 </html>
+
+

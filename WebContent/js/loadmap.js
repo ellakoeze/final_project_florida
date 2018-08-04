@@ -21,6 +21,8 @@
  * -- K.W. working on that 
  * --S.G. helping? kind of..
  * 
+ * 
+ * 
  * 4. USER SAVES PLACES THEY SELECT
  * -- https://stackoverflow.com/questions/28975015/google-maps-api-v3-0-saving-a-reference-to-a-marker // could hep to save markers user clicks
  * -- https://www.youtube.com/watch?v=q2VV3-yWupU
