@@ -9,7 +9,7 @@
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <!-- Google Map js libraries-->
-   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=PUTKEYHERE&signed_in=true&libraries=places,visualization"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=PUTKEYHEREAIzaSyD5Na0geM1T9MAdrJvnqDfU4jF-ooM_yvw&signed_in=true&libraries=places,visualization"></script>
 </head>
 <body>
  <div id="map-canvas"></div>
