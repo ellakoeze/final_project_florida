@@ -80,7 +80,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 			
 			// creating the landmarks 
 			// this is the table == landmarks COLUMN ==  type 
-			String type = request.getParameter("type");
+			//String landmarkType = request.getParameter("type");
 			
 			ResultSet res = dbutil.queryDB(sql);
 			while (res.next()) {
