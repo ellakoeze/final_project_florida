@@ -2,12 +2,26 @@
 
 Create a new database named `final_project_florida` and install the postgis extension. 
 
+
+
+
 Run the following commands: 
 
-`create type landmark as enum('Beach','airport','Hotel','amusement','campground', 'golf_course', 'nationa_forest_fed_land', 'national_park','shopping_center','state_local_park','other');`
+```
 
 
-`create table person (id bigserial primary key, first_name varchar(64) not null, last_name varchar(64) not null, email varchar(128) );`
+create type landmark as enum('Beach','airport','Hotel','amusement','campground', 'golf_course', 
+'nationa_forest_fed_land', 'national_park','shopping_center','state_local_park','other');
+
+
+```
+
+
+```
+
+create table person (id bigserial primary key, first_name varchar(64) not null, last_name varchar(64) not null, email varchar(128) );
+
+```
 
 ```
 create table landmarks (
@@ -26,4 +40,7 @@ create table landmarks (
 COPY landmarks(name,type,lat,long, user_created, user_saved)
 FROM '[PATH TO DATA]/landmarks.csv' DELIMITER ',' CSV HEADER; 
 ```
+
+
+Open Eclipse 
 

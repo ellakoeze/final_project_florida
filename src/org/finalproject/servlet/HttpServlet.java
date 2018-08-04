@@ -77,6 +77,11 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 			JSONArray list = new JSONArray();
 			DBUtility dbutil = new DBUtility();
 			String sql = "select * from landmarks";
+			
+			// creating the landmarks 
+			// this is the table == landmarks COLUMN ==  type 
+			String type = request.getParameter("type");
+			
 			ResultSet res = dbutil.queryDB(sql);
 			while (res.next()) {
 				// add to response
