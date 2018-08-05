@@ -16,7 +16,7 @@
 
  <!-- Google Map js libraries-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=YOURAPIKEY&signed_in=true&libraries=places,visualization"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyBgMOnmrj45GHfn1lzdrBAt_FKUTJbZEYE&signed_in=true&libraries=places,visualization"></script>
 
 </head>
 <body>
