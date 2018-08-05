@@ -16,7 +16,11 @@
 
  <!-- Google Map js libraries-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<<<<<<< HEAD
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyBgMOnmrj45GHfn1lzdrBAt_FKUTJbZEYE&signed_in=true&libraries=places,visualization"></script>
+=======
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=API_KEY_HERE&signed_in=true&libraries=places,visualization"></script>
+>>>>>>> 29760d3ac55302c73ba7bcfcc8284fa9c402d51f
 
 </head>
 <body>
@@ -47,68 +51,68 @@
             <br></br>
             <div class="btn-group-toggle" data-toggle="buttons">
   <label class="btn primary">
-    <input type="checkbox" autocomplete="off"> Show All
+    <input type="checkbox" autocomplete="off" onchange="filterMap('all', this)"> Show All
   </label>
   </select>
 </div>
 <div class="btn-group-toggle" data-toggle="buttons">
     <img src="/img/beach-icon.png">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> Airport
+    <input type="checkbox" checked autocomplete="off" id="airport" onchange="filterMap('airport', this)"> Airport
   </label>
 </div>
 <div class="btn-group-toggle" data-toggle="buttons">
     <img src="/img/beach-icon.png">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> Amusement
+    <input type="checkbox" checked autocomplete="off" onchange="filterMap('amusement', this)"> Amusement
   </label>
 </div>
 <div class="btn-group-toggle" data-toggle="buttons">
     <img src="/img/beach-icon.png">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> Beach
+    <input type="checkbox" checked autocomplete="off" onchange="filterMap('Beach', this)"> Beach
   </label>
 </div>
 <div class="btn-group-toggle" data-toggle="buttons">
     <img src="/img/beach-icon.png">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> Campground
+    <input type="checkbox" checked autocomplete="off" onchange="filterMap('campground', this)"> Campground
   </label>
 </div>
 <div class="btn-group-toggle" data-toggle="buttons">
     <img src="/img/beach-icon.png">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> Golf Course
+    <input type="checkbox" checked autocomplete="off" onchange="filterMap('golf_course', this)"> Golf Course
   </label>
 </div>
 <div class="btn-group-toggle" data-toggle="buttons">
     <img src="/img/beach-icon.png">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> Hotel
+    <input type="checkbox" checked autocomplete="off" onchange="filterMap('Hotel', this)"> Hotel
   </label>
 </div>
 <div class="btn-group-toggle" data-toggle="buttons">
     <img src="/img/beach-icon.png">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> National Forest
+    <input type="checkbox" checked autocomplete="off" onchange="filterMap('nationa_forest_fed_land', this)"> National Forest
   </label>
 </div>
 <div class="btn-group-toggle" data-toggle="buttons">
     <img src="/img/beach-icon.png">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> Federal Land
+    <input type="checkbox" checked autocomplete="off" onchange="filterMap('national_park', this)"> National Park
   </label>
 </div>
 <div class="btn-group-toggle" data-toggle="buttons">
     <img src="/img/beach-icon.png">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> Shopping Center
+    <input type="checkbox" checked autocomplete="off" onchange="filterMap('shopping_center', this)"> Shopping Center
   </label>
 </div>
 <div class="btn-group-toggle" data-toggle="buttons">
   <img src="/img/beach-icon.png">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off">State/Local Park
+    <input type="checkbox" checked autocomplete="off" onchange="filterMap('state_local_park', this)">State/Local Park
   </label>
   </div>
   </form>
