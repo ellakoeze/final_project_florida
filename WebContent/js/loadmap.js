@@ -47,14 +47,14 @@
 var map;
 
 function initialization() {
-	showAllLandMarks(); 
+	showAllLandMarks();
 }
 
 function showAllLandMarks() {
   $.ajax({
     url: 'HttpServlet',
     type: 'POST',
-    data: { "tab_id": "1", "type": "all"},
+    data: { "tab_id": "1"},
     success: function(landmarks) { 
       mapInitialization(landmarks);
     },
@@ -137,36 +137,6 @@ google.maps.event.addListener(marker, 'click', function() {
   
   
 } //end of mapInitialization
-
-
-//event listener on side bar
-function filterMap(type, button){
-	console.log(button.checked, type);
-	
-	if(!button.checked){
-		
-		//call function to remove unchecked landmarks from the function here
-	}
-	else if(button.checked){
-		// do ajax request
-		$.ajax({
-		    url: 'HttpServlet',
-		    type: 'POST',
-		    data: { "tab_id": "1", "type": type},
-		    success: function(landmarks) { 
-		    console.log(landmarks);
-		    // call function to add chosen landmarks to the map here
-		      alert('I chose '+type+'s!')
-		    },
-		    error: function(xhr, status, error) {
-		      alert("An AJAX error occured: " + status + "\nError: " + error);
-		    }
-		  });	
-		
-	}
-	
-	
-}
 
 
 //Execute our 'initialization' function once the page has loaded.
