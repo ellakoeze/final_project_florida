@@ -30,8 +30,9 @@
 <body>
 <!-- Header (Navigation Bar) -->
 <nav class="navbar navbar-default">
-<div class="navbar-header">
-      <a class="navbar-brand" href="#">Florida Vacation Planner</a></nav>
+	<div class="navbar-header">
+		<a class="navbar-brand" href="#">Florida Vacation Planner</a>
+</nav>
 
         
         <div class="container-fluid">
