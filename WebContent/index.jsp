@@ -17,7 +17,7 @@
  <!-- Google Map js libraries 29760d3ac55302c73ba7bcfcc8284fa9c402d51f-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyBgMOnmrj45GHfn1lzdrBAt_FKUTJbZEYE&signed_in=true&libraries=places,visualization"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=YOURAPIKEY&signed_in=true&libraries=places,visualization"></script>
 
 <!-- 
 =======
