@@ -6,6 +6,7 @@
  * Features
  * 1. View All POIS
  * -- UP AND RUNNING E.K. created initial project 
+ * -- K.W. has icons picked out for different POIs. need to load in.  
  * 
  * 
  * 2. USER ADD THEIR OWN POI
@@ -18,10 +19,9 @@
  * 
  * 
  * 3. TOGGLE POI ON/OFF
- * -- K.W. working on that 
+ * -- K.W. added toggle buttons to pane on homescreen, successful on\off toggle with layers added 08/07
  * --S.G. helping? kind of..
- * 
- * 
+ * --collaborative effort: E.K., S.G., K.W.  * 
  * 
  * 4. USER SAVES PLACES THEY SELECT
  * -- https://stackoverflow.com/questions/28975015/google-maps-api-v3-0-saving-a-reference-to-a-marker // could hep to save markers user clicks
@@ -47,14 +47,15 @@
 var map;
 
 function initialization() {
-	showAllLandMarks();
+	showLandMarks("none");
 }
 
-function showAllLandMarks() {
+//function to select landmarks based on type (to be used on Filter map function below)
+function showLandMarks(selType) {
   $.ajax({
     url: 'HttpServlet',
     type: 'POST',
-    data: { "tab_id": "1"},
+    data: { "tab_id": "1", "type": selType},
     success: function(landmarks) { 
       mapInitialization(landmarks);
     },
@@ -64,10 +65,11 @@ function showAllLandMarks() {
   });
 } // end of showAllLandMarks
 
-
 function mapInitialization(landmarks) {
 var mapOptions = { 
 		mapTypeId : google.maps.MapTypeId.ROADMAP,
+        center: {lat: 27.6648, lng: 81.5158},
+        zoom: 8
 		};// set the type of MAP	
 
 // Render the map within the empty div
@@ -139,6 +141,30 @@ google.maps.event.addListener(marker, 'click', function() {
 } //end of mapInitialization
 
 
+//event listener on side bar
+function filterMap(type, button){
+	console.log(button.checked, type);
+	
+	if(!button.checked){
+	}
+	else if(button.checked){
+		// do ajax request
+		$.ajax({
+		    url: 'HttpServlet',
+		    type: 'POST',
+		    data: { "tab_id": "1", "type": type},
+		    success: function(landmarks) { 
+		    console.log(landmarks);
+		    
+		    //added function to call specific type that is selected from ShowLandMarks function above.
+		    showLandMarks(type)
+		    },
+		    error: function(xhr, status, error) {
+		      alert("An AJAX error occured: " + status + "\nError: " + error);
+		    }
+		  });	
+	}	
+}
 //Execute our 'initialization' function once the page has loaded.
 google.maps.event.addDomListener(window, 'load', initialization);
 
