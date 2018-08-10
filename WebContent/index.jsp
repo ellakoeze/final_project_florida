@@ -35,105 +35,91 @@
 </nav>
 
         
-        <div class="container-fluid">
-        <div class="row">
-        <!--  -->
-        <div class="sidebar col-xs-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="sidebar col-xs-3">
         <!-- Tab Navis-->
         <ul class="nav nav-tabs">
           <li class="active"><a href="#query_landmarks" data-toggle="tab">Legend</a></li>
-          <li><a href="#add_landmarks" data-toggle="tab">Add Landmark</a></li>
+          <li><a href="#query_landmarks" data-toggle="tab">Add Landmark</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content ">
-          
           <!-- Create Legend Tab Panel -->
-          <div class="tab-pane active" id="query_landmarks">
+          <div class="tab-pane active" id="create_report">
             <form id = "create_report_form">
             <br></br>
-            
-            
             <div class="btn-group-toggle" data-toggle="buttons">
-            
-            <label class="btn primary">
-    <input type="checkbox" autocomplete="off"> Show All
+  <label class="btn primary">
+    <input type="checkbox" autocomplete="off" onchange="filterMap('all', this)"> Show All
   </label>
-  
-  </select>
-
-
 </div>
-				
-				<div class="btn-group-toggle" data-toggle="buttons">
-				    <img src="/img/beach-icon.png">
-				  <label class="btn btn-secondary active">
-				    <input type="checkbox" checked autocomplete="off"> Airport
-				  </label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-				    <img src="/img/beach-icon.png">
-				  <label class="btn btn-secondary active">
-				    <input type="checkbox" checked autocomplete="off"> Amusement
-				  </label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-				    <img src="/img/beach-icon.png">
-				  <label class="btn btn-secondary active">
-				    <input type="checkbox" checked autocomplete="off"> Beach
-				  </label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-				    <img src="/img/beach-icon.png">
-				  <label class="btn btn-secondary active">
-				    <input type="checkbox" checked autocomplete="off"> Campground
-				  </label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-				    <img src="/img/beach-icon.png">
-				  <label class="btn btn-secondary active">
-				    <input type="checkbox" checked autocomplete="off"> Golf Course
-				  </label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-				    <img src="/img/beach-icon.png">
-				  <label class="btn btn-secondary active">
-				    <input type="checkbox" checked autocomplete="off"> Hotel
-				  </label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-				    <img src="/img/beach-icon.png">
-				  <label class="btn btn-secondary active">
-				    <input type="checkbox" checked autocomplete="off"> National Forest
-				  </label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-				    <img src="/img/beach-icon.png">
-				  <label class="btn btn-secondary active">
-				    <input type="checkbox" checked autocomplete="off"> Federal Land
-				  </label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-				    <img src="/img/beach-icon.png">
-				  <label class="btn btn-secondary active">
-				    <input type="checkbox" checked autocomplete="off"> Shopping Center
-				  </label>
-				</div>
-				<div class="btn-group-toggle" data-toggle="buttons">
-				  <img src="/img/beach-icon.png">
-				  <label class="btn btn-secondary active">
-				    <input type="checkbox" checked autocomplete="off">State/Local Park
-				  </label>
-				  </div>
+<div class="btn-group-toggle" data-toggle="buttons">
+    <img src="img/Airport-icon.png">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" autocomplete="off" id="airport" onchange="filterMap('airport', this)"> Airport
+  </label>
+</div>
+<div class="btn-group-toggle" data-toggle="buttons">
+    <img src="img/Airport-icon.png">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" autocomplete="off" onchange="filterMap('amusement', this)"> Amusement
+  </label>
+</div>
+<div class="btn-group-toggle" data-toggle="buttons">
+    <img src="/img/beach-icon.png">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" autocomplete="off" onchange="filterMap('Beach', this)"> Beach
+  </label>
+</div>
+<div class="btn-group-toggle" data-toggle="buttons">
+    <img src="/img/beach-icon.png">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" autocomplete="off" onchange="filterMap('campground', this)"> Campground
+  </label>
+</div>
+<div class="btn-group-toggle" data-toggle="buttons">
+    <img src="/img/beach-icon.png">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" autocomplete="off" onchange="filterMap('golf_course', this)"> Golf Course
+  </label>
+</div>
+<div class="btn-group-toggle" data-toggle="buttons">
+    <img src="/img/beach-icon.png">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" autocomplete="off" onchange="filterMap('Hotel', this)"> Hotel
+  </label>
+</div>
+<div class="btn-group-toggle" data-toggle="buttons">
+    <img src="/img/beach-icon.png">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" autocomplete="off" onchange="filterMap('nationa_forest_fed_land', this)"> National Forest
+  </label>
+</div>
+<div class="btn-group-toggle" data-toggle="buttons">
+    <img src="/img/beach-icon.png">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" autocomplete="off" onchange="filterMap('national_park', this)"> National Park
+  </label>
+</div>
+<div class="btn-group-toggle" data-toggle="buttons">
+    <img src="/img/beach-icon.png">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" autocomplete="off" onchange="filterMap('shopping_center', this)"> Shopping Center
+  </label>
+</div>
+<div class="btn-group-toggle" data-toggle="buttons">
+  <img src="/img/beach-icon.png">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" autocomplete="off" onchange="filterMap('state_local_park', this)">State/Local Park
+  </label>
+  </div>
   </form>
-  
- 
-  
 </div>
 
       <!-- Query Report Tab Panel -->
-      <div class="tab-pane" id="add_landmarks">
-          <form id = "addLandMark">
-            
+      <div class="tab-pane" id="query_report">
+            <form id = "query_report_form">
             <br></br>
             <div><label>Landmark Type:</label>
             <select name="landmark_type">
@@ -149,30 +135,17 @@
             <option value="Shopping Center">Shopping Center</option>
             <option value="State\Local Park">State\Local Park</option>                  
             </select>
-
-</div>
-
-              <div><label>Name of Landmark:&nbsp</label><input placeholder="Name of the Landmark you want to add" name="nameLand"></div>
-              <!-- used with google maps API in loadmap.js -->
-              <div><label>Address:</label><input id="autocomplete" placeholder="Address" ></div>
-              
-              <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-star"></span> Submit New Landmark</button>
-
-
-
+              <button type="submit" class="btn btn-default" id="report_submit_btn">
+                <span class="glyphicon glyphicon-star"></span> Submit
+              </button>
+              </div>
               </form>
-              
-              
-              </div> <!-- end of query report tab panel  -->
-              </div><!--  end of tab content -->
-             </div> <!-- end of side bar  -->
-          
+              </div>
+              </div>
+              </div>
 <div id="map-canvas" class="col-md-9"></div>
-
-</div><!-- end of row -->
-</div> <!-- end of container fluid -->
-</div> <!-- end of class bar header -->
-
+</div>
+</div>
     
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -185,5 +158,3 @@
 
 </body>
 </html>
-
-
