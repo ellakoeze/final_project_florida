@@ -68,8 +68,8 @@ function showLandMarks(selType) {
 function mapInitialization(landmarks) {
 var mapOptions = { 
 		mapTypeId : google.maps.MapTypeId.ROADMAP,
-        center: {lat: 27.6648, lng: 81.5158},
-        zoom: 8
+        center: {lat: 28.18, lng: -81.5158}, //correct 
+        zoom: 10
 		};// set the type of MAP	
 
 // Render the map within the empty div
