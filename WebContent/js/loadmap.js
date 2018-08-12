@@ -46,8 +46,10 @@
 
 var map;
 
+var markers = [];
+
 function initialization() {
-	showLandMarks("none");
+	showLandMarks("all");
 }
 
 //function to select landmarks based on type (to be used on Filter map function below)
@@ -66,76 +68,79 @@ function showLandMarks(selType) {
 } // end of showAllLandMarks
 
 function mapInitialization(landmarks) {
-var mapOptions = { 
+	var mapOptions = { 
 		mapTypeId : google.maps.MapTypeId.ROADMAP,
         center: {lat: 28.18, lng: -81.5158}, //correct 
         zoom: 10
 		};// set the type of MAP	
 
-// Render the map within the empty div
-map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-var bounds = new google.maps.LatLngBounds ();
+	// Render the map within the empty div
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	var bounds = new google.maps.LatLngBounds ();
 
-//need to be filled in 
-var icons = {
-	beaches: { icon:''},//img/image.png // file path once we decided the files  
-	hotels: {icon:''},
-	airports: { icon:''},
-	nationalParks: {icon:''},
-	shoppingCenters: { icon:''},
-	campgrounds: {icon:''}
+	//need to be filled in 
+	var icons = {
+			beaches: { icon:''},//img/image.png // file path once we decided the files  
+			hotels: {icon:''},
+			airports: { icon:''},
+			nationalParks: {icon:''},
+			shoppingCenters: { icon:''},
+			campgrounds: {icon:''}
 	  };//end of icon VAR
 
-//jquery function  
-$.each(landmarks, function(i, e) {
-    var long = Number(e['longitude']);
-    var lat = Number(e['latitude']);
-    //var landmarkType=e['type']; // landmarkType empty string should be the string in the name var in index.jsp 
-    var latlng = new google.maps.LatLng(lat, long);     
-    bounds.extend(latlng);
+	//jquery function  
+	$.each(landmarks, function(i, e) {
+		var long = Number(e['longitude']);
+		var lat = Number(e['latitude']);
+		var type = e.type;
+		//var landmarkType=e['type']; // landmarkType empty string should be the string in the name var in index.jsp 
+		var latlng = new google.maps.LatLng(lat, long);     
+		bounds.extend(latlng);
     
-//create the content window information if needed
-//add if loops to match the markers with the TYPE, NAME, Address??
-//
-    // Create the infoWindow content
-//    var contentStr = '<h4>Report Details</h4><hr>';
-//    contentStr += '<p><b>' + 'Disaster' + ':</b>&nbsp' + e['disaster'] + '</p>';
-//    contentStr += '<p><b>' + 'Report Type' + ':</b>&nbsp' + e['report_type'] + 
-//      '</p>';
-//    if (e['report_type'] == 'request' || e['report_type'] == 'donation') {
-//      contentStr += '<p><b>' + 'Resource Type' + ':</b>&nbsp' + 
-//        e['resource_type'] + '</p>';
-//    }//end of if 
-//    else if (e['report_type'] == 'damage') {
-//      contentStr += '<p><b>' + 'Damage Type' + ':</b>&nbsp' + e['damage_type'] 
-//        + '</p>';
-//    }//end of else is
-//    //reporter 
-//    contentStr += '<p><b>' + 'Reporter' + ':</b>&nbsp' + e['first_name'] + '&nbsp' + e['last_name'] + '</p>';
-//    contentStr += '<p><b>' + 'Timestamp' + ':</b>&nbsp' + 
-//      e['time_stamp'].substring(0,19) + '</p>';
-//    if ('message' in e){
-//      contentStr += '<p><b>' + 'Message' + ':</b>&nbsp' + e['message'] + '</p>';
-//    }//end of if
+		//create the content window information if needed
+		//add if loops to match the markers with the TYPE, NAME, Address??
+		//
+		// Create the infoWindow content
+		//    var contentStr = '<h4>Report Details</h4><hr>';
+		//    contentStr += '<p><b>' + 'Disaster' + ':</b>&nbsp' + e['disaster'] + '</p>';
+		//    contentStr += '<p><b>' + 'Report Type' + ':</b>&nbsp' + e['report_type'] + 
+		//      '</p>';
+		//    if (e['report_type'] == 'request' || e['report_type'] == 'donation') {
+		//      contentStr += '<p><b>' + 'Resource Type' + ':</b>&nbsp' + 
+		//        e['resource_type'] + '</p>';
+		//    }//end of if 
+		//    else if (e['report_type'] == 'damage') {
+		//      contentStr += '<p><b>' + 'Damage Type' + ':</b>&nbsp' + e['damage_type'] 
+		//        + '</p>';
+		//    }//end of else is
+		//    //reporter 
+		//    contentStr += '<p><b>' + 'Reporter' + ':</b>&nbsp' + e['first_name'] + '&nbsp' + e['last_name'] + '</p>';
+		//    contentStr += '<p><b>' + 'Timestamp' + ':</b>&nbsp' + 
+		//      e['time_stamp'].substring(0,19) + '</p>';
+		//    if ('message' in e){
+		//      contentStr += '<p><b>' + 'Message' + ':</b>&nbsp' + e['message'] + '</p>';
+		//    }//end of if
 
-// Create the marker
-var marker = new google.maps.Marker({ // Set the marker
-  position : latlng, // Position marker to coordinates
-  //icon: icons[landmarkType].icon, //update icon image 
-  map : map, // assign the market to our map variable
-  //customInfo: contentStr, //content strings in above in the commented code above 
-}); //end of marker VAR
+		// Create the marker
+		var marker = new google.maps.Marker({ // Set the marker
+			position : latlng, // Position marker to coordinates
+			//icon: icons[landmarkType].icon, //update icon image 
+			map : map,
+			type: type
+			//customInfo: contentStr, //content strings in above in the commented code above 
+		}); //end of marker VAR
 
-// Add a Click Listener to the marker
-google.maps.event.addListener(marker, 'click', function() { 
-  // use 'customInfo' to customize infoWindow
-  //infowindow.setContent(marker['customInfo']);
-  infowindow.open(map, marker); // Open InfoWindow
-}); //end of google maps event listener
+		// Add a Click Listener to the marker
+		google.maps.event.addListener(marker, 'click', function() { 
+			// use 'customInfo' to customize infoWindow
+			//infowindow.setContent(marker['customInfo']);
+			infowindow.open(map, marker); // Open InfoWindow
+		}); //end of google maps event listener
   
-});//end of JQUERY
+		markers.push(marker);
+	});//end of JQUERY
   
-  map.fitBounds (bounds);
+	map.fitBounds (bounds);
   
   
 } //end of mapInitialization
@@ -143,21 +148,24 @@ google.maps.event.addListener(marker, 'click', function() {
 
 //event listener on side bar
 function filterMap(type, button){
-	console.log(button.checked, type);
+//	console.log(button.checked, type);
 	
 	if(!button.checked){
+		clearMap(type);
 	}
 	else if(button.checked){
+		if(type == 'all'){
+			document.getElementById("all-text").innerHTML= "Clear map";
+		}
 		// do ajax request
 		$.ajax({
 		    url: 'HttpServlet',
 		    type: 'POST',
 		    data: { "tab_id": "1", "type": type},
 		    success: function(landmarks) { 
-		    console.log(landmarks);
 		    
 		    //added function to call specific type that is selected from ShowLandMarks function above.
-		    showLandMarks(type)
+		    addToMap(landmarks);
 		    },
 		    error: function(xhr, status, error) {
 		      alert("An AJAX error occured: " + status + "\nError: " + error);
@@ -165,6 +173,65 @@ function filterMap(type, button){
 		  });	
 	}	
 }
+
+function addToMap(landmarks){
+	
+	var currentBounds = map.getBounds();
+	
+	$.each(landmarks, function(i, e) {
+	    var long = Number(e['longitude']);
+	    var lat = Number(e['latitude']);
+	    var type = e.type;
+	    var latlng = new google.maps.LatLng(lat, long);  
+	    
+	    currentBounds.extend(latlng);
+	   
+	    var newMarker = new google.maps.Marker({ // Set the marker
+	    	  position : latlng, // Position marker to coordinates
+	    	  //icon: icons[landmarkType].icon, //update icon image 
+	    	  map : map, 
+	    	  type: type
+	    	  //customInfo: contentStr, //content strings in above in the commented code above 
+	    	}); 
+
+	    	// Add a Click Listener to the marker
+	    	google.maps.event.addListener(newMarker, 'click', function() { 
+	    	  // use 'customInfo' to customize infoWindow
+	    	  //infowindow.setContent(marker['customInfo']);
+	    	  infowindow.open(map, marker); 
+	    }); 
+	    markers.push(newMarker);
+	});
+}
+
+function clearMap(type){
+	
+	if(type == 'all'){
+		$.each(markers, function(i,m){
+			m.setMap(null);
+		});
+		markers =[];
+		document.getElementById("all-text").innerHTML= "Show all";
+	}
+	else{
+		var rmMarkers = markers.filter(function(m){
+			return m.type == type;
+		});
+	
+		$.each(rmMarkers, function(i,m){
+			m.setMap(null);
+			var index = markers.indexOf(m);
+			console.log(index);
+			if(index>-1){
+				markers.splice(index, 1);
+			}
+		});
+	}
+	
+
+}
+
+
 //Execute our 'initialization' function once the page has loaded.
 google.maps.event.addDomListener(window, 'load', initialization);
 

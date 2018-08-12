@@ -90,7 +90,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 				while (res.next()) {
 					// this is where we list the data we want to get back
 					HashMap<String, String> m = new HashMap<String,String>();
-					m.put("type:", res.getString("type"));
+					m.put("type", res.getString("type"));
 					m.put("longitude", res.getString("long"));
 					m.put("latitude", res.getString("lat"));
 					list.put(m);
