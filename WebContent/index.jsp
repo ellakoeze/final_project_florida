@@ -17,7 +17,7 @@
  <!-- Google Map js libraries 29760d3ac55302c73ba7bcfcc8284fa9c402d51f-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=YOURAPI&signed_in=true&libraries=places,visualization"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=KEYHERE&signed_in=true&libraries=places,visualization"></script>
 
 <!-- 
 =======
@@ -149,7 +149,7 @@
               </div> <!--  end of tab content -->
               
               </div> <!-- end of side bar  -->
-<div id="map-canvas" class="col-md-9"></div>
+<div id="map-canvas" class="col-md-9 col-xs-9"></div>
 </div> <!-- end of row -->
 </div> <!-- container-fluid" -->
     

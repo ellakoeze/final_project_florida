@@ -148,14 +148,30 @@ function mapInitialization(landmarks) {
 
 //event listener on side bar
 function filterMap(type, button){
-//	console.log(button.checked, type);
-	
+
 	if(!button.checked){
 		clearMap(type);
+		document.getElementById("all-text").innerHTML= "Show all";
+		let buttons = document.getElementsByClassName("toggle");
+		for (var i = 0; i < buttons.length; i++) {
+	        buttons[i].checked = false;
+	    }
+		let labels = document.getElementsByClassName("btn-secondary");
+		for (var i = 0; i < labels.length; i++) {
+	        labels[i].classList.remove("active");
+	    }
 	}
 	else if(button.checked){
 		if(type == 'all'){
 			document.getElementById("all-text").innerHTML= "Clear map";
+			let buttons = document.getElementsByClassName("toggle");
+			for (var i = 0; i < buttons.length; i++) {
+		        buttons[i].checked = true;
+		    }
+			let labels = document.getElementsByClassName("btn-secondary");
+			for (var i = 0; i < labels.length; i++) {
+		        labels[i].classList.add("active");
+		    }
 		}
 		// do ajax request
 		$.ajax({
@@ -210,8 +226,7 @@ function clearMap(type){
 		$.each(markers, function(i,m){
 			m.setMap(null);
 		});
-		markers =[];
-		document.getElementById("all-text").innerHTML= "Show all";
+		markers = [];
 	}
 	else{
 		var rmMarkers = markers.filter(function(m){
