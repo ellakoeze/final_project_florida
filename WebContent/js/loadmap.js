@@ -151,15 +151,6 @@ function filterMap(type, button){
 
 	if(!button.checked){
 		clearMap(type);
-		document.getElementById("all-text").innerHTML= "Show all";
-		let buttons = document.getElementsByClassName("toggle");
-		for (var i = 0; i < buttons.length; i++) {
-	        buttons[i].checked = false;
-	    }
-		let labels = document.getElementsByClassName("btn-secondary");
-		for (var i = 0; i < labels.length; i++) {
-	        labels[i].classList.remove("active");
-	    }
 	}
 	else if(button.checked){
 		if(type == 'all'){
@@ -227,6 +218,15 @@ function clearMap(type){
 			m.setMap(null);
 		});
 		markers = [];
+		document.getElementById("all-text").innerHTML= "Show all";
+		let buttons = document.getElementsByClassName("toggle");
+		for (var i = 0; i < buttons.length; i++) {
+	        buttons[i].checked = false;
+	    }
+		let labels = document.getElementsByClassName("btn-secondary");
+		for (var i = 0; i < labels.length; i++) {
+	        labels[i].classList.remove("active");
+	    }
 	}
 	else{
 		var rmMarkers = markers.filter(function(m){
@@ -236,7 +236,6 @@ function clearMap(type){
 		$.each(rmMarkers, function(i,m){
 			m.setMap(null);
 			var index = markers.indexOf(m);
-			console.log(index);
 			if(index>-1){
 				markers.splice(index, 1);
 			}
