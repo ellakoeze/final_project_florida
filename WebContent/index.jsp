@@ -17,7 +17,7 @@
  <!-- Google Map js libraries 29760d3ac55302c73ba7bcfcc8284fa9c402d51f-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=APIKEY&signed_in=true&libraries=places,visualization"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyBgMOnmrj45GHfn1lzdrBAt_FKUTJbZEYE&signed_in=true&libraries=places,visualization"></script>
 
 <!-- 
 =======
@@ -123,7 +123,7 @@
 
       <!-- Query Report Tab Panel -->
       <div class="tab-pane" id="addLandmarks">
-            <form id = "add_landMarks_form">
+            <form id ="add_landMarks_form">
             <br></br>
             <div><label>Landmark Type:</label>
             <select name="landmark_type">
@@ -139,6 +139,13 @@
             <option value="Shopping Center">Shopping Center</option>
             <option value="State\Local Park">State\Local Park</option>                  
             </select>
+  			<div><label>Name of Landmark:&nbsp</label><input placeholder="Name of Venue, Place, Park, &  etc..." name="fN"></div>
+            
+            <div><label>Address for Landmark:</label>
+                <input id="autocomplete" placeholder="Address" >
+            </div>
+            <div><label>Notes:&nbsp</label><input placeholder="Additional message, hours of operation, & Rating " name="message"></div>
+            
               <button type="submit" class="btn btn-default" id="report_submit_btn">
                 <span class="glyphicon glyphicon-star"></span> Submit
               </button>
@@ -152,6 +159,10 @@
 <div id="map-canvas" class="col-md-9 col-xs-9"></div>
 </div> <!-- end of row -->
 </div> <!-- container-fluid" -->
+    
+    
+    
+    
     
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

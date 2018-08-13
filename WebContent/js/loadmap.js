@@ -1,4 +1,5 @@
 // Geog 576: Final Project 
+
 /*
  * 
  * List of features that need to be added and who is working on it 
@@ -141,8 +142,34 @@ function mapInitialization(landmarks) {
 	});//end of JQUERY
   
 	map.fitBounds (bounds);
+	
+	$("addLandmarks").each(function(){
+		
+	      function placeMarkerAndPanTo(latLng, map) {
+	          var marker = new google.maps.Marker({
+	            position: latLng,
+	            map: map
+	          });
+	          map.panTo(latLng);
+	          
+	          map.addListener('click', function(e) {
+	              placeMarkerAndPanTo(e.latLng, map);
+	            });
+	          
+	        } // end of placemarkerandpanto
+		
+	});
+	
+
+	
+//    map.addListener('click', function(e) {
+//        placeMarkerAndPanTo(e.latLng, map);
+//      });
+//    
+
+    
   
-  
+
 } //end of mapInitialization
 
 
@@ -179,9 +206,9 @@ function filterMap(type, button){
 		    }
 		  });	
 	}	
-}
+} //filterMap
 
-function addToMap(landmarks){
+function addToMap(landmarks){ 
 	
 	var currentBounds = map.getBounds();
 	
@@ -208,8 +235,12 @@ function addToMap(landmarks){
 	    	  infowindow.open(map, marker); 
 	    }); 
 	    markers.push(newMarker);
-	});
-}
+	}); // end of jquery
+	
+	
+} //addToMap
+
+
 
 function clearMap(type){
 	
@@ -243,11 +274,28 @@ function clearMap(type){
 	}
 	
 
-}
+} //end of map clearMap
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //Execute our 'initialization' function once the page has loaded.
 google.maps.event.addDomListener(window, 'load', initialization);
-
-
 
