@@ -58,12 +58,14 @@
 						    <p id = "all-text">Clear map</p>
 						  </label>
 						</div>
+						
 						<div class="btn-group-toggle" data-toggle="buttons">
 						    <img src="img/Airport-icon.png">
 						  <label class="btn btn-secondary active">
 						    <input class ="toggle" type="checkbox" autocomplete="off" id="airport" onchange="filterMap('airport', this)"> Airport
 						  </label>
 						</div>
+						
 						<div class="btn-group-toggle" data-toggle="buttons">
 						    <img src="img/Airport-icon.png">
 						  <label class="btn btn-secondary active">
@@ -125,6 +127,14 @@
       <div class="tab-pane" id="addLandmarks">
             <form id ="add_landMarks_form">
             <br></br>
+            
+            <div class="btn-group-toggle" data-toggle="buttons">
+			<label class="btn primary active">
+			<input type="checkbox" autocomplete="off" onchange="addMapMarker('addClickMarker', this)" > 
+			<p id = "addMarker-text">Add A Landmark</p>
+			</label>
+			</div>
+            
             <div><label>Landmark Type:</label>
             <select name="landmark_type">
             <option value="">Choose the Landmark Type:</option>
@@ -141,9 +151,9 @@
             </select>
   			<div><label>Name of Landmark:&nbsp</label><input placeholder="Name of Venue, Place, Park, &  etc..." name="fN"></div>
             
-            <div><label>Address for Landmark:</label>
+ <!--            <div><label>Address for Landmark:</label>
                 <input id="autocomplete" placeholder="Address" >
-            </div>
+            </div> -->
             <div><label>Notes:&nbsp</label><input placeholder="Additional message, hours of operation, & Rating " name="message"></div>
             
               <button type="submit" class="btn btn-default" id="report_submit_btn">

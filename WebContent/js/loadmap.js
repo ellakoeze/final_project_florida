@@ -139,39 +139,40 @@ function mapInitialization(landmarks) {
 		}); //end of google maps event listener
   
 		markers.push(marker);
+	
 	});//end of JQUERY
-  
+	
 	map.fitBounds (bounds);
 	
-	$("addLandmarks").each(function(){
-		
-	      function placeMarkerAndPanTo(latLng, map) {
-	          var marker = new google.maps.Marker({
-	            position: latLng,
-	            map: map
-	          });
-	          map.panTo(latLng);
-	          
-	          map.addListener('click', function(e) {
-	              placeMarkerAndPanTo(e.latLng, map);
-	            });
-	          
-	        } // end of placemarkerandpanto
-		
-	});
-	
-
-	
-//    map.addListener('click', function(e) {
-//        placeMarkerAndPanTo(e.latLng, map);
-//      });
-//    
-
-    
-  
 
 } //end of mapInitialization
 
+function addMapMarker(type, button){
+	
+	if(button.checked){
+        var onClick = map.addListener('click', function(e) {
+            placeMarkerAndPanTo(e.latLng, map);
+            google.maps.event.removeListener(onClick);
+          });
+        }//end of if statement, else statement not needed  
+	} //end of addMapMrker
+	
+	
+function placeMarkerAndPanTo(latLng, map) {
+	if(marker){
+		//if marker already was created change positon
+		marker.setPosition(latLng);
+		} else{
+			var marker = new google.maps.Marker({
+				animation: google.maps.Animation.DROP,
+				position: latLng,
+				draggable: true,
+				map: map
+				}) 
+			 map.panTo(latLng); 
+			 map.setCenter(marker.getPosition());
+			}//end of else 
+	} // end of placeMarkerAndPanTo
 
 //event listener on side bar
 function filterMap(type, button){
@@ -191,6 +192,8 @@ function filterMap(type, button){
 		        labels[i].classList.add("active");
 		    }
 		}
+		
+		
 		// do ajax request
 		$.ajax({
 		    url: 'HttpServlet',
@@ -207,6 +210,9 @@ function filterMap(type, button){
 		  });	
 	}	
 } //filterMap
+
+
+
 
 function addToMap(landmarks){ 
 	
