@@ -159,6 +159,7 @@ function addMapMarker(type, button){
 	
 	
 function placeMarkerAndPanTo(latLng, map) {
+	//console.log(marker.getPosition());
 	if(marker){
 		//if marker already was created change positon
 		marker.setPosition(latLng);
@@ -169,9 +170,10 @@ function placeMarkerAndPanTo(latLng, map) {
 				draggable: true,
 				map: map
 				}) 
-			 map.panTo(latLng); 
-			 map.setCenter(marker.getPosition());
 			}//end of else 
+	var submitLat = marker.getPosition().lat();
+	var submitLong = marker.getPosition().lng();
+
 	} // end of placeMarkerAndPanTo
 
 //event listener on side bar

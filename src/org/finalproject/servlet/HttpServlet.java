@@ -45,9 +45,9 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 		
 		String tab_id = request.getParameter("tab_id");
 		
-		// create a report
+		// submit a newlandmark
 //		if (tab_id.equals("0")) {
-//			System.out.println("A report is submitted!");
+//			System.out.println("Your Landmark has been submitted for review!");
 //			try {
 //				//where we will eventually call the create here
 //			} catch (SQLException e) {
@@ -68,6 +68,51 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 			}
 		}
 	}
+
+	private void createNewLandmark(HttpServletRequest request, HttpServletResponse 
+			response) throws SQLException, IOException {
+		DBUtility dbutil = new DBUtility();		
+		String sql;
+		
+		// create new landmark
+		int report_id = 0;
+		String report_type = request.getParameter("report_type");
+		String disaster_type = request.getParameter("disaster_type");
+		String lon = request.getParameter("longitude");
+		String lat = request.getParameter("latitude");
+		String message = request.getParameter("message");
+		String add_msg = request.getParameter("additional_message");
+		if (report_type != null) {report_type = "'" + report_type + "'";}
+		if (disaster_type != null) {disaster_type = "'" + disaster_type + "'";}
+		if (message != null) {message = "'" + message + "'";}
+		if (add_msg != null) {add_msg = "'" + add_msg + "'";}
+		//name              |  type   |     lat     |     long     | user_created | user_saved | notes 		
+		sql = "insert into report (reporter_id, report_type, disaster_type, geom," +
+				" message) values (" + report_type + "," + report_type + "," + disaster_type
+				+ ", ST_GeomFromText('POINT(" + lon + " " + lat + ")', 4326)" + "," + 
+				message + ")";
+		dbutil.modifyDB(sql);
+		
+		// record report_id
+		ResultSet res_3 = dbutil.queryDB("select last_value from landmarks_id_seq");
+		res_3.next();
+		report_id = res_3.getInt(1);
+		
+		System.out.println("Success! Report created.");
+
+		
+		// response that the report submission is successful
+		JSONObject data = new JSONObject();
+		try {
+			data.put("status", "success");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}	
+		response.getWriter().write(data.toString());
+		
+	} //end of createReport	
+	
+	
 
 	private void queryLandmarks(HttpServletRequest request, HttpServletResponse 
 			response) throws JSONException, SQLException, IOException {
@@ -98,7 +143,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 				
 				response.getWriter().write(list.toString());
 		}
-	}
+	} // end of queryLandmarks
 	
 	public void main() throws JSONException {
 	}
