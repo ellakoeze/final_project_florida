@@ -7,15 +7,29 @@ html {
   right:0;
   width: 75%;
 }
-#legend {
+/* #legend {
 	height: 100%;
 	font-family: 'Roboto', sans-serif;
 	background: #fff;
 }
 #legend h3 {
-	margin-top: 10;
+	margin-top: 10px;
 	font-family: 'Roboto', sans-serif;
 }
 #legend img {
 	vertical-align: middle;
+} */
+
+#add-options{
+	height: 0px;
+	overflow: hidden;	
 }
+
+#add-options.active{
+	height: 100%;
+}
+
+/* .btn.primary.add-button.active{
+	background: #ffffff;
+	border: none;
+} */

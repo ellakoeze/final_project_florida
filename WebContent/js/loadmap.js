@@ -147,14 +147,23 @@ function mapInitialization(landmarks) {
 
 } //end of mapInitialization
 
-function addMapMarker(type, button){
+function addMapMarker(button){
+	
+	console.log(button.checked);
 	
 	if(button.checked){
+		clearMap("all");
+		document.getElementById("add-options").classList.add("active");
+		document.getElementById("addMarker-text").innerHTML = "Hide";
         var onClick = map.addListener('click', function(e) {
             placeMarkerAndPanTo(e.latLng, map);
             google.maps.event.removeListener(onClick);
           });
-        }//end of if statement, else statement not needed  
+        }
+	else{
+		document.getElementById("add-options").classList.remove("active");
+		document.getElementById("addMarker-text").innerHTML = "Add landmark";
+	}
 	} //end of addMapMrker
 	
 	

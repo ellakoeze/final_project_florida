@@ -7,7 +7,6 @@
 <title>The Florida Project</title>
   <!-- Custom styles -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" href="css/styles.css">
 
@@ -17,7 +16,7 @@
  <!-- Google Map js libraries 29760d3ac55302c73ba7bcfcc8284fa9c402d51f-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=APIHERE&signed_in=true&libraries=places,visualization"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=API_HERE&signed_in=true&libraries=places,visualization"></script>
 
 <!-- 
 =======
@@ -129,27 +128,30 @@
             <br></br>
             
             <div class="btn-group-toggle" data-toggle="buttons">
-			<label class="btn primary active">
-			<input type="checkbox" autocomplete="off" onchange="addMapMarker('addClickMarker', this)" > 
+			<label class="btn primary add-button">
+			<input type="checkbox" autocomplete="off" onchange="addMapMarker(this)" > 
 			<p id = "addMarker-text">Add A Landmark</p>
 			</label>
 			</div>
             
-            <div><label>Landmark Type:</label>
-            <select name="landmark_type">
-            <option value="">Choose the Landmark Type:</option>
-            <option value="Airport">Airport</option>
-            <option value="Amusement">Amusement</option>
-            <option value="Beach">Beach</option>
-            <option value="Campground">Campground</option>
-            <option value="GolfCourse">GolfCourse</option>
-            <option value="Hotel">Hotel</option>
-            <option value="Federal Land">Federal Land</option>
-            <option value="National Park">National Park</option>
-            <option value="Shopping Center">Shopping Center</option>
-            <option value="State\Local Park">State\Local Park</option>                  
-            </select>
-  			<div><label>Name of Landmark:&nbsp</label><input placeholder="Name of Venue, Place, Park, &  etc..." name="fN"></div>
+            <div id="add-options">
+            	<p>Click on the map to place your landmark</p>
+            	<label>Landmark Type:</label>
+            	<select name="landmark_type">
+            		<option value="">Choose the Landmark Type:</option>
+            		<option value="Airport">Airport</option>
+            		<option value="Amusement">Amusement</option>
+            		<option value="Beach">Beach</option>
+            		<option value="Campground">Campground</option>
+            		<option value="GolfCourse">GolfCourse</option>
+            		<option value="Hotel">Hotel</option>
+            		<option value="Federal Land">Federal Land</option>
+            		<option value="National Park">National Park</option>
+            		<option value="Shopping Center">Shopping Center</option>
+            		<option value="State\Local Park">State\Local Park</option>                  
+            	</select>
+  			<div>
+  			<label>Name of Landmark:&nbsp</label><input placeholder="Name of Venue, Place, Park, &  etc..." name="fN"></div>
             
  <!--            <div><label>Address for Landmark:</label>
                 <input id="autocomplete" placeholder="Address" >
