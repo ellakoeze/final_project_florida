@@ -46,7 +46,8 @@
 
 
 var map;
-
+var submitLat;
+var submitLong; 
 var markers = [];
 
 function initialization() {
@@ -182,7 +183,7 @@ function placeMarkerAndPanTo(latLng, map) {
 			}//end of else 
 	var submitLat = marker.getPosition().lat();
 	var submitLong = marker.getPosition().lng();
-
+	
 	} // end of placeMarkerAndPanTo
 
 //event listener on side bar
@@ -293,24 +294,42 @@ function clearMap(type){
 
 } //end of map clearMap
 
+//id | name | type | lat | long | user_created | user_saved | notes 
 
+function createReport(event){
+	event.preventDefault();  // stop form from submitting normally
+	var a=$("#add_landMarks_form").serializeArray(); //Create the array | ID needs to be lower case and use _ UGHHH
+	a.push({name: "tab_id", value: "0"}); //add the tab_id to the array with a 0 value - indicating the landmark 
+	//a.push({name: "tab_id", value: "0"});
+	a.push({name: "latitude", value: submitLat});
+	a.push({name: "longitude", value: submitLong});
+	//key : value assigned to var a
+	a=a.filter(function(item){return item.item !='';});
+	
+	//AJAX POST
+	$.ajax({ 
+		url: 'HttpServlet',
+		type: 'POST',
+		data: a,
+		success: function(landmarks) {
+			alert("Report submitted!"); //alert created
+			document.getElementById("add_landMarks_form").reset(); //reset form 
+			showAllReports(); // map re-populated with reports
+			},
+			error: function(xhr, status, error) {
+				alert("Status: " + status + "\nError: " + error);
+				}
+	}); //end of AJAX POST 
+	
+} // end of createReport function 
 
+$("#add_landMarks_form").on("submit",createReport);
 
+//a.push({name: "latitude", value: marker.getPosition().lat()});
+//a.push({name: "longitude", value: marker.getPosition().lng()});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//a.push({name: "latitude", value: place.geometry.location.lat()});
+//a.push({name: "longitude", value: place.geometry.location.lng()});
 
 
 //Execute our 'initialization' function once the page has loaded.

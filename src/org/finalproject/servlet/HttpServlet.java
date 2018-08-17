@@ -46,15 +46,14 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 		String tab_id = request.getParameter("tab_id");
 		
 		// submit a newlandmark
-//		if (tab_id.equals("0")) {
-//			System.out.println("Your Landmark has been submitted for review!");
-//			try {
-//				//where we will eventually call the create here
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		} 
-		
+		if (tab_id.equals("0")) {
+			System.out.println("Your Landmark has been submitted for review!");
+			try {
+				createNewLandmark(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} 
 		// query reports
 		if (tab_id.equals("1")) {
 			try {
@@ -76,27 +75,28 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 		
 		// create new landmark
 		int report_id = 0;
-		String report_type = request.getParameter("report_type");
-		String disaster_type = request.getParameter("disaster_type");
-		String lon = request.getParameter("longitude");
-		String lat = request.getParameter("latitude");
-		String message = request.getParameter("message");
+		String landmarkName = request.getParameter("name");
+		String landmarkType = request.getParameter("type");
+		String lon = request.getParameter("long");
+		String lat = request.getParameter("lat");
+		String message = request.getParameter("notes");
+		
+		
 		String add_msg = request.getParameter("additional_message");
-		if (report_type != null) {report_type = "'" + report_type + "'";}
-		if (disaster_type != null) {disaster_type = "'" + disaster_type + "'";}
+		if (landmarkName != null) {landmarkName = "'" + landmarkName + "'";}
+		if (landmarkType != null) {landmarkType = "'" + landmarkType + "'";}
 		if (message != null) {message = "'" + message + "'";}
-		if (add_msg != null) {add_msg = "'" + add_msg + "'";}
-		//name              |  type   |     lat     |     long     | user_created | user_saved | notes 		
-		sql = "insert into report (reporter_id, report_type, disaster_type, geom," +
-				" message) values (" + report_type + "," + report_type + "," + disaster_type
+		//id  | name |  type   | lat | long | user_created | user_saved | notes 
+		sql = "insert into landmarks (id, name, type, geom," +
+				" message) values (" + report_id + "," + landmarkName + "," + landmarkType
 				+ ", ST_GeomFromText('POINT(" + lon + " " + lat + ")', 4326)" + "," + 
 				message + ")";
 		dbutil.modifyDB(sql);
 		
 		// record report_id
-		ResultSet res_3 = dbutil.queryDB("select last_value from landmarks_id_seq");
-		res_3.next();
-		report_id = res_3.getInt(1);
+		ResultSet res_1 = dbutil.queryDB("select last_value from report_id");
+		res_1.next();
+		report_id = res_1.getInt(1);
 		
 		System.out.println("Success! Report created.");
 
