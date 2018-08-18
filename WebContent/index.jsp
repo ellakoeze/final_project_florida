@@ -151,7 +151,7 @@
             		<option value="State\Local Park">State\Local Park</option>                  
             	</select>
   			<div>
-  			<label>Name of Landmark:&nbsp</label><input placeholder="Name of Venue, Place, Park, &  etc..." name="fN"></div>
+  			<label>Name of Landmark:&nbsp</label><input placeholder="Name of Venue, Place, Park, &  etc..." name="LandMark Name"></div>
             
  <!--            <div><label>Address for Landmark:</label>
                 <input id="autocomplete" placeholder="Address" >

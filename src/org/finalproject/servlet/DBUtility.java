@@ -57,7 +57,7 @@ public class DBUtility {
 				conn.close();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 	}
 

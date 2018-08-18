@@ -46,8 +46,8 @@
 
 
 var map;
-var submitLat;
-var submitLong; 
+var clickMarker;
+var latLng;
 var markers = [];
 
 function initialization() {
@@ -143,7 +143,7 @@ function mapInitialization(landmarks) {
 	
 	});//end of JQUERY
 	
-	map.fitBounds (bounds);
+	map.fitBounds (bounds); 
 	
 
 } //end of mapInitialization
@@ -170,21 +170,27 @@ function addMapMarker(button){
 	
 function placeMarkerAndPanTo(latLng, map) {
 	//console.log(marker.getPosition());
-	if(marker){
+	if(clickMarker){
 		//if marker already was created change positon
-		marker.setPosition(latLng);
+		clickMarker.setPosition(latLng);
 		} else{
-			var marker = new google.maps.Marker({
+			clickMarker = new google.maps.Marker({
 				animation: google.maps.Animation.DROP,
 				position: latLng,
 				draggable: true,
 				map: map
-				}) 
+				})
+			
 			}//end of else 
-	var submitLat = marker.getPosition().lat();
-	var submitLong = marker.getPosition().lng();
-	
+	google.maps.event.addListener(clickMarker, "click", function (e) {
+
+	    //lat and lng is available in e object
+	    var latLng = e.latLng;
+
+	});
 	} // end of placeMarkerAndPanTo
+
+
 
 //event listener on side bar
 function filterMap(type, button){
@@ -222,9 +228,6 @@ function filterMap(type, button){
 		  });	
 	}	
 } //filterMap
-
-
-
 
 function addToMap(landmarks){ 
 	
@@ -299,22 +302,26 @@ function clearMap(type){
 function createReport(event){
 	event.preventDefault();  // stop form from submitting normally
 	var a=$("#add_landMarks_form").serializeArray(); //Create the array | ID needs to be lower case and use _ UGHHH
-	a.push({name: "tab_id", value: "0"}); //add the tab_id to the array with a 0 value - indicating the landmark 
-	//a.push({name: "tab_id", value: "0"});
-	a.push({name: "latitude", value: submitLat});
-	a.push({name: "longitude", value: submitLong});
+	a.push({name: "tab_id", value: "0"}); //add the tab_id to the array with a 0 value - indicating the landmark
+	console.log(latLng)
+	
+	a.push({name: "tab_id", value: "0"});
+	a.push({name: "latitude", value: latLng.geometry.location.lat()});
+	a.push({name: "longitude", value: latLng.geometry.location.lng()});
 	//key : value assigned to var a
 	a=a.filter(function(item){return item.item !='';});
+	//console.log(place)
 	
 	//AJAX POST
 	$.ajax({ 
 		url: 'HttpServlet',
 		type: 'POST',
-		data: a,
+		data: a,  
 		success: function(landmarks) {
+			//console.log(landmarks)
 			alert("Report submitted!"); //alert created
 			document.getElementById("add_landMarks_form").reset(); //reset form 
-			showAllReports(); // map re-populated with reports
+			initialization(); // map re-populated with reports
 			},
 			error: function(xhr, status, error) {
 				alert("Status: " + status + "\nError: " + error);
@@ -325,13 +332,6 @@ function createReport(event){
 
 $("#add_landMarks_form").on("submit",createReport);
 
-//a.push({name: "latitude", value: marker.getPosition().lat()});
-//a.push({name: "longitude", value: marker.getPosition().lng()});
 
-//a.push({name: "latitude", value: place.geometry.location.lat()});
-//a.push({name: "longitude", value: place.geometry.location.lng()});
-
-
-//Execute our 'initialization' function once the page has loaded.
 google.maps.event.addDomListener(window, 'load', initialization);
 

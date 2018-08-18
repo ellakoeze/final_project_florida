@@ -80,26 +80,24 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 		String lon = request.getParameter("long");
 		String lat = request.getParameter("lat");
 		String message = request.getParameter("notes");
-		
-		
-		String add_msg = request.getParameter("additional_message");
 		if (landmarkName != null) {landmarkName = "'" + landmarkName + "'";}
 		if (landmarkType != null) {landmarkType = "'" + landmarkType + "'";}
 		if (message != null) {message = "'" + message + "'";}
-		//id  | name |  type   | lat | long | user_created | user_saved | notes 
+
 		sql = "insert into landmarks (id, name, type, geom," +
 				" message) values (" + report_id + "," + landmarkName + "," + landmarkType
 				+ ", ST_GeomFromText('POINT(" + lon + " " + lat + ")', 4326)" + "," + 
 				message + ")";
+			
+		
 		dbutil.modifyDB(sql);
 		
 		// record report_id
-		ResultSet res_1 = dbutil.queryDB("select last_value from report_id");
+		ResultSet res_1 = dbutil. queryDB("select last_value from landmarks_id_seq");
 		res_1.next();
 		report_id = res_1.getInt(1);
 		
 		System.out.println("Success! Report created.");
-
 		
 		// response that the report submission is successful
 		JSONObject data = new JSONObject();
@@ -110,6 +108,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 		}	
 		response.getWriter().write(data.toString());
 		
+
 	} //end of createReport	
 	
 	
