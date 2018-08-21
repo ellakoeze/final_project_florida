@@ -47,7 +47,7 @@
 
 var map;
 var clickMarker;
-var latLng;
+var createLatLng;
 var markers = [];
 
 function initialization() {
@@ -150,7 +150,7 @@ function mapInitialization(landmarks) {
 
 function addMapMarker(button){
 	
-	console.log(button.checked);
+//	console.log(button.checked);
 	
 	if(button.checked){
 		clearMap("all");
@@ -158,6 +158,7 @@ function addMapMarker(button){
 		document.getElementById("addMarker-text").innerHTML = "Hide";
         var onClick = map.addListener('click', function(e) {
             placeMarkerAndPanTo(e.latLng, map);
+            createLatLng = e.latLng;
             google.maps.event.removeListener(onClick);
           });
         }
@@ -181,14 +182,9 @@ function placeMarkerAndPanTo(latLng, map) {
 				map: map
 				})
 			
-			}//end of else 
-	google.maps.event.addListener(clickMarker, "click", function (e) {
+		}//end of else 
 
-	    //lat and lng is available in e object
-	    var latLng = e.latLng;
-
-	});
-	} // end of placeMarkerAndPanTo
+} // end of placeMarkerAndPanTo
 
 
 
@@ -303,7 +299,10 @@ function createReport(event){
 	event.preventDefault();  // stop form from submitting normally
 	var a=$("#add_landMarks_form").serializeArray(); //Create the array | ID needs to be lower case and use _ UGHHH
 	a.push({name: "tab_id", value: "0"}); //add the tab_id to the array with a 0 value - indicating the landmark
-	console.log(latLng)
+	
+	
+	
+	console.log(createLatLng) //this log is now working
 	
 	a.push({name: "tab_id", value: "0"});
 	a.push({name: "latitude", value: latLng.geometry.location.lat()});
