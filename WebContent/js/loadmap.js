@@ -230,7 +230,6 @@ function filterMap(type, button){
 		    }
 		}
 		
-		
 		// do ajax request
 		$.ajax({
 		    url: 'HttpServlet',
@@ -262,7 +261,7 @@ function addToMap(landmarks){
 	   
 	    var newMarker = new google.maps.Marker({ // Set the marker
 	    	  position : latlng, // Position marker to coordinates
-	    	  //icon: icons[landmarkType].icon, //update icon image 
+//	    	  icon: icons[landmarkType].icon, //update icon image 
 	    	  map : map, 
 	    	  type: type
 	    	  //customInfo: contentStr, //content strings in above in the commented code above 
@@ -329,6 +328,8 @@ function createReport(event){
 	//console.log(place)
 	///look at jsp to grba ID and not the label 
 	console.log(a);
+
+	
 	
 	//AJAX POST
 	$.ajax({ 

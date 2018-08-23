@@ -135,19 +135,20 @@
             
             <div id="add-options">
             	<p>Click on the map to place your landmark</p>
-            	<label>Landmark Type:</label>
+            	<label>Select a Landmark:</label>
             	<select name="landmark_type">
-            		<option value="">Choose the Landmark Type:</option>
-            		<option value="Airport">Airport</option>
-            		<option value="Amusement">Amusement</option>
+            	<!-- do not change the value   -->
+            		<!-- <option value="">Choose the Landmark Type:</option> -->
+            		<option value="airport">Airport</option>
+            		<option value="amusement">Amusement</option>
             		<option value="Beach">Beach</option>
-            		<option value="Campground">Campground</option>
-            		<option value="GolfCourse">GolfCourse</option>
+            		<option value="campground">Campground</option>
+            		<option value="golf_course">GolfCourse</option>
             		<option value="Hotel">Hotel</option>
-            		<option value="Federal Land">Federal Land</option>
-            		<option value="National Park">National Park</option>
-            		<option value="Shopping Center">Shopping Center</option>
-            		<option value="State\Local Park">State\Local Park</option>                  
+            		<option value="nationa_forest_fed_land">Federal Land</option>
+            		<option value="national_park">National Park</option>
+            		<option value="shopping_center">Shopping Center</option>
+            		<option value="state_local_park">State or Local Park</option>                  
             	</select>
   			<div>
   			<label>Name of Landmark:&nbsp</label><input placeholder="Name of Venue, Place, Park, &  etc..." name="LandMark Name"></div>
