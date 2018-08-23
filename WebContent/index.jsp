@@ -58,62 +58,62 @@
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="\final_project_florida-master\img\airport.png">
+						    <img src="img/airport.png"/>
 						  <label class="btn btn-secondary active">
 						    <input class ="toggle" value = "airport" type="checkbox" autocomplete="off" onchange="filterMap('airport', this)"> Airport
 						  </label>
 						</div>
 						
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="\final_project_florida-master\img\amusement.png">
+						    <img src="img/amusement.png">
 						  <label class="btn btn-secondary active">
 						    <input class ="toggle" value = "amusement" type="checkbox" autocomplete="off" onchange="filterMap('amusement', this)"> Amusement
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="\final_project_florida-master\img\beach.png">
+						    <img src="img/beach.png">
 						  <label class="btn btn-secondary active">
 						    <input  class ="toggle" value = "Beach" type="checkbox" autocomplete="off" onchange="filterMap('Beach', this)"> Beach
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="\final_project_florida-master\img\campground.png">
+						    <img src="img/campground.png">
 						  <label class="btn btn-secondary active">
 						    <input class ="toggle" value = "campground" type="checkbox" autocomplete="off" onchange="filterMap('campground', this)"> Campground
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="\final_project_florida-master\img\golf_course.png">
+						    <img src="img/golf_course.png">
 						  <label class="btn btn-secondary active">
 						    <input class ="toggle" value = "golf_course" type="checkbox" autocomplete="off" onchange="filterMap('golf_course', this)"> Golf Course
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="\final_project_florida-master\img\Hotel.png">
+						    <img src="img/Hotel.png">
 						  <label class="btn btn-secondary active">
 						    <input class ="toggle" value = "Hotel" type="checkbox" autocomplete="off" onchange="filterMap('Hotel', this)"> Hotel
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="\final_project_florida-master\img\nationa_forest_fed_land.png">
+						    <img src="img/nationa_forest_fed_land.png">
 						  <label class="btn btn-secondary active">
 						    <input class ="toggle" value = "nationa_forest_fed_land" type="checkbox" autocomplete="off" onchange="filterMap('nationa_forest_fed_land', this)"> National Forest
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="\final_project_florida-master\img\national_park.png">
+						    <img src="img/national_park.png">
 						  <label class="btn btn-secondary active">
 						    <input class ="toggle" value = "national_park" type="checkbox" autocomplete="off" onchange="filterMap('national_park', this)"> National Park
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="\final_project_florida-master\img\shopping_center.png">
+						    <img src="img/shopping_center.png">
 						  <label class="btn btn-secondary active">
 						    <input class ="toggle" value = "shopping_center" type="checkbox" autocomplete="off" onchange="filterMap('shopping_center', this)"> Shopping Center
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						  <img src="\final_project_florida-master\img\state_local_park.png">
+						  <img src="img/state_local_park.png">
 						  <label class="btn btn-secondary active">
 						    <input class ="toggle" value = "state_local_park" type="checkbox" autocomplete="off" onchange="filterMap('state_local_park', this)">State/Local Park
 						  </label>

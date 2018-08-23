@@ -73,7 +73,7 @@ function mapInitialization(landmarks) {
 	var mapOptions = { 
 		mapTypeId : google.maps.MapTypeId.ROADMAP,
         center: {lat: 28.18, lng: -81.5158}, //correct 
-        zoom: 15
+        zoom: 5
 		};// set the type of MAP	
 
 	// Render the map within the empty div
@@ -83,34 +83,34 @@ function mapInitialization(landmarks) {
 	//these photo files align to the photos in the /img folder of the project. 
 	var icons = {//img/image.png // file path once we decided the files  
 			airport: { 
-				icon: '/img/airport.png'
+				icon: 'img/airport.png'
 					},
 			amusement: {
-				icon: '/img/amusement.png'
+				icon: 'img/amusement.png'
 					},
 			Beach: {
-				icon:'/img/beach.png'
+				icon:'img/beach.png'
 					},
 			campground: {
-				icon: '/img/campground.png'
+				icon: 'img/campground.png'
 					},
 			golf_course: {
-				icon: '/img/golf_course.png'
+				icon: 'img/golf_course.png'
 					},
 			Hotel: {
-				icon:'/img/Hotel.png'
+				icon:'img/Hotel.png'
 					},
 			nationa_forest_fed_land: {
-				icon: '/img/nationa_forest_fed_land.png'
+				icon: 'img/nationa_forest_fed_land.png'
 					},
 			national_park: {
-				icon:'/img/national_park.png'
+				icon:'img/national_park.png'
 					},
 			shopping_center: {
-				icon:'/img/shopping_center.png'
+				icon:'img/shopping_center.png'
 					},
 			state_local_park: {
-				icon:'/img/state_local_park.png'
+				icon:'img/state_local_park.png'
 					},
 	  };//end of icon VAR
 
