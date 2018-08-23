@@ -73,7 +73,7 @@ function mapInitialization(landmarks) {
 	var mapOptions = { 
 		mapTypeId : google.maps.MapTypeId.ROADMAP,
         center: {lat: 28.18, lng: -81.5158}, //correct 
-        zoom: 10
+        zoom: 15
 		};// set the type of MAP	
 
 	// Render the map within the empty div
@@ -181,9 +181,8 @@ function placeMarkerAndPanTo(latLng, map) {
 				draggable: true,
 				map: map
 				})
-			
 		}//end of else 
-
+	return clickMarker;
 } // end of placeMarkerAndPanTo
 
 
@@ -293,23 +292,19 @@ function clearMap(type){
 
 } //end of map clearMap
 
-//id | name | type | lat | long | user_created | user_saved | notes 
+
 
 function createReport(event){
 	event.preventDefault();  // stop form from submitting normally
 	var a=$("#add_landMarks_form").serializeArray(); //Create the array | ID needs to be lower case and use _ UGHHH
 	a.push({name: "tab_id", value: "0"}); //add the tab_id to the array with a 0 value - indicating the landmark
-	
-	
-	
-	console.log(createLatLng) //this log is now working
-	
-	a.push({name: "tab_id", value: "0"});
-	a.push({name: "latitude", value: latLng.geometry.location.lat()});
-	a.push({name: "longitude", value: latLng.geometry.location.lng()});
+	a.push({name: "latitude", value: clickMarker.getPosition().lat()});
+	a.push({name: "longitude", value: clickMarker.getPosition().lng()});
 	//key : value assigned to var a
 	a=a.filter(function(item){return item.item !='';});
 	//console.log(place)
+	///look at jsp to grba ID and not the label 
+	console.log(a);
 	
 	//AJAX POST
 	$.ajax({ 

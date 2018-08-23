@@ -75,20 +75,26 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 		
 		// create new landmark
 		int report_id = 0;
-		String landmarkName = request.getParameter("name");
-		String landmarkType = request.getParameter("type");
-		String lon = request.getParameter("long");
-		String lat = request.getParameter("lat");
-		String message = request.getParameter("notes");
+		String landmarkName = request.getParameter("LandMark Name");
+		String landmarkType = request.getParameter("landmark_type");
+		String lon = request.getParameter("longitude");
+		String lat = request.getParameter("latitude");
+		String message = request.getParameter("message");
 		if (landmarkName != null) {landmarkName = "'" + landmarkName + "'";}
 		if (landmarkType != null) {landmarkType = "'" + landmarkType + "'";}
 		if (message != null) {message = "'" + message + "'";}
 
-		sql = "insert into landmarks (id, name, type, geom," +
-				" message) values (" + report_id + "," + landmarkName + "," + landmarkType
-				+ ", ST_GeomFromText('POINT(" + lon + " " + lat + ")', 4326)" + "," + 
-				message + ")";
-			
+		//not needed for our DB
+//		sql = "insert into landmarks (name, type, geom," +
+//				" message) values (" + landmarkName + "," + landmarkType
+//				+ ", ST_GeomFromText('POINT(" + lon + " " + lat + ")', 4326)" + "," + 
+//				message + ")";
+
+		
+		//id | name | type | lat | long | user_created | user_saved | notes
+		sql = "insert into landmarks ( name, type, lat,long,notes)" 
+		+ "values (" + landmarkName + "," + landmarkType + "," + lat  + "," + lon   + "," + message + ")";
+
 		
 		dbutil.modifyDB(sql);
 		
@@ -97,7 +103,10 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 		res_1.next();
 		report_id = res_1.getInt(1);
 		
-		System.out.println("Success! Report created.");
+		System.out.println("Success! Landmark add created.");
+		
+		
+		
 		
 		// response that the report submission is successful
 		JSONObject data = new JSONObject();
