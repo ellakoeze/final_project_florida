@@ -76,7 +76,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 		// create new landmark
 		int report_id = 0;
 		String landmarkName = request.getParameter("LandMark Name");
-		String landmarkType = request.getParameter("landmark_type");
+		String landmarkType = request.getParameter("type");
 		String lon = request.getParameter("longitude");
 		String lat = request.getParameter("latitude");
 		String message = request.getParameter("message");
@@ -104,6 +104,8 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 		report_id = res_1.getInt(1);
 		
 		System.out.println("Success! Landmark add created.");
+		
+		System.out.println(sql);
 		
 		
 		

@@ -374,7 +374,7 @@ function addIcon(array){
 	
 	markers.push(clickMarker);
 	
-	clickMarker = null;
+//	clickMarker = null;
 	document.getElementById("add-button").classList.remove("active");
 	document.getElementById("add-options").classList.remove("active");
 	document.getElementById("addMarker-text").innerHTML = "Add landmark";
