@@ -127,7 +127,7 @@
             <br></br>
             
             <div class="btn-group-toggle" data-toggle="buttons">
-			<label class="btn primary add-button">
+			<label class="btn primary add-button" id="add-button">
 			<input type="checkbox" autocomplete="off" onchange="addMapMarker(this)" > 
 			<p id = "addMarker-text">Add A Landmark</p>
 			</label>

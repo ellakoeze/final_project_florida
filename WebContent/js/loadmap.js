@@ -370,8 +370,14 @@ function addIcon(array){
 	}
 	
 	clickMarker.setIcon(icons[requestData.type].icon);
-
+	clickMarker.type = requestData.type;
+	
+	markers.push(clickMarker);
+	
 	clickMarker = null;
+	document.getElementById("add-button").classList.remove("active");
+	document.getElementById("add-options").classList.remove("active");
+	document.getElementById("addMarker-text").innerHTML = "Add landmark";
 }
 
 
