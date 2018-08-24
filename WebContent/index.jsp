@@ -52,7 +52,7 @@
 		           
 		            <br></br>
 		            	<div class="btn-group-toggle" data-toggle="buttons">
-						  <label class="btn primary active">
+						  <label class="btn primary active" id="top-button">
 						    <input type="checkbox" autocomplete="off" onchange="filterMap('all', this)" > 
 						    <p id = "all-text">Clear map</p>
 						  </label>
@@ -136,7 +136,7 @@
             <div id="add-options">
             	<p>Click on the map to place your landmark</p>
             	<label>Select a Landmark:</label>
-            	<select name="landmark_type">
+            	<select name="type">
             	<!-- do not change the value   -->
             		<!-- <option value="">Choose the Landmark Type:</option> -->
             		<option value="airport">Airport</option>

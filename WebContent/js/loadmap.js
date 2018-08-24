@@ -50,6 +50,40 @@ var clickMarker;
 var createLatLng;
 var markers = [];
 
+//these photo files align to the photos in the /img folder of the project. 
+var icons = {//img/image.png // file path once we decided the files  
+		airport: { 
+			icon: 'img/airport.png'
+				},
+		amusement: {
+			icon: 'img/amusement.png'
+				},
+		Beach: {
+			icon:'img/beach.png'
+				},
+		campground: {
+			icon: 'img/campground.png'
+				},
+		golf_course: {
+			icon: 'img/golf_course.png'
+				},
+		Hotel: {
+			icon:'img/Hotel.png'
+				},
+		nationa_forest_fed_land: {
+			icon: 'img/nationa_forest_fed_land.png'
+				},
+		national_park: {
+			icon:'img/national_park.png'
+				},
+		shopping_center: {
+			icon:'img/shopping_center.png'
+				},
+		state_local_park: {
+			icon:'img/state_local_park.png'
+				},
+  };//end of icon VAR
+
 function initialization() {
 	showLandMarks("all");
 }
@@ -79,40 +113,6 @@ function mapInitialization(landmarks) {
 	// Render the map within the empty div
 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 	var bounds = new google.maps.LatLngBounds ();
-
-	//these photo files align to the photos in the /img folder of the project. 
-	var icons = {//img/image.png // file path once we decided the files  
-			airport: { 
-				icon: 'img/airport.png'
-					},
-			amusement: {
-				icon: 'img/amusement.png'
-					},
-			Beach: {
-				icon:'img/beach.png'
-					},
-			campground: {
-				icon: 'img/campground.png'
-					},
-			golf_course: {
-				icon: 'img/golf_course.png'
-					},
-			Hotel: {
-				icon:'img/Hotel.png'
-					},
-			nationa_forest_fed_land: {
-				icon: 'img/nationa_forest_fed_land.png'
-					},
-			national_park: {
-				icon:'img/national_park.png'
-					},
-			shopping_center: {
-				icon:'img/shopping_center.png'
-					},
-			state_local_park: {
-				icon:'img/state_local_park.png'
-					},
-	  };//end of icon VAR
 
 	//jquery function  
 	$.each(landmarks, function(i, e) {
@@ -146,24 +146,27 @@ function mapInitialization(landmarks) {
 		//    if ('message' in e){
 		//      contentStr += '<p><b>' + 'Message' + ':</b>&nbsp' + e['message'] + '</p>';
 		//    }//end of if
+		
+		if(type){
 
 		// Create the marker
-		var marker = new google.maps.Marker({ // Set the marker
-			position : latlng, // Position marker to coordinates
-			icon: icons[landmarkType].icon, //update icon image 
-			map : map,
-			type: type
+			var marker = new google.maps.Marker({ // Set the marker
+				position : latlng, // Position marker to coordinates
+				icon: icons[type].icon, //update icon image 
+				map : map,
+				type: type
 			//customInfo: contentStr, //content strings in above in the commented code above 
-		}); //end of marker VAR
+			}); //end of marker VAR
 
-		// Add a Click Listener to the marker
-		google.maps.event.addListener(marker, 'click', function() { 
-			// use 'customInfo' to customize infoWindow
-			//infowindow.setContent(marker['customInfo']);
-			infowindow.open(map, marker); // Open InfoWindow
-		}); //end of google maps event listener
+			// Add a Click Listener to the marker
+			google.maps.event.addListener(marker, 'click', function() { 
+				// use 'customInfo' to customize infoWindow
+				//infowindow.setContent(marker['customInfo']);
+				infowindow.open(map, marker); // Open InfoWindow
+			}); //end of google maps event listener
   
-		markers.push(marker);
+			markers.push(marker);
+		}
 	
 	});//end of JQUERY
 	
@@ -178,6 +181,7 @@ function addMapMarker(button){
 	
 	if(button.checked){
 		clearMap("all");
+		document.getElementById("top-button").classList.remove("active");
 		document.getElementById("add-options").classList.add("active");
 		document.getElementById("addMarker-text").innerHTML = "Hide";
         var onClick = map.addListener('click', function(e) {
@@ -257,23 +261,24 @@ function addToMap(landmarks){
 	    var type = e.type;
 	    var latlng = new google.maps.LatLng(lat, long);  
 	    
-	    currentBounds.extend(latlng);
+	    if(type && latlng){
 	   
-	    var newMarker = new google.maps.Marker({ // Set the marker
-	    	  position : latlng, // Position marker to coordinates
-//	    	  icon: icons[landmarkType].icon, //update icon image 
-	    	  map : map, 
-	    	  type: type
-	    	  //customInfo: contentStr, //content strings in above in the commented code above 
-	    	}); 
+	    	var newMarker = new google.maps.Marker({ // Set the marker
+	    		position : latlng, // Position marker to coordinates
+	    		icon: icons[type].icon, //update icon image 
+	    		map : map, 
+	    		type: type
+	    		//customInfo: contentStr, //content strings in above in the commented code above 
+	    		}); 
 
-	    	// Add a Click Listener to the marker
-	    	google.maps.event.addListener(newMarker, 'click', function() { 
-	    	  // use 'customInfo' to customize infoWindow
-	    	  //infowindow.setContent(marker['customInfo']);
-	    	  infowindow.open(map, marker); 
-	    }); 
-	    markers.push(newMarker);
+	    		// Add a Click Listener to the marker
+	    		google.maps.event.addListener(newMarker, 'click', function() { 
+	    			// use 'customInfo' to customize infoWindow
+	    			//infowindow.setContent(marker['customInfo']);
+	    			infowindow.open(map, marker); 
+	    		}); 
+	    		markers.push(newMarker);
+	    }
 	}); // end of jquery
 	
 	
@@ -316,9 +321,12 @@ function clearMap(type){
 } //end of map clearMap
 
 
-
 function createReport(event){
 	event.preventDefault();  // stop form from submitting normally
+	if (!clickMarker){
+		alert("please select a location");
+		return;
+	}
 	var a=$("#add_landMarks_form").serializeArray(); //Create the array | ID needs to be lower case and use _ UGHHH
 	a.push({name: "tab_id", value: "0"}); //add the tab_id to the array with a 0 value - indicating the landmark
 	a.push({name: "latitude", value: clickMarker.getPosition().lat()});
@@ -327,20 +335,19 @@ function createReport(event){
 	a=a.filter(function(item){return item.item !='';});
 	//console.log(place)
 	///look at jsp to grba ID and not the label 
-	console.log(a);
-
-	
+//	console.log(a);
 	
 	//AJAX POST
 	$.ajax({ 
 		url: 'HttpServlet',
 		type: 'POST',
 		data: a,  
-		success: function(landmarks) {
-			//console.log(landmarks)
+		success: function(result) {
+//			console.log(result)
 			alert("Report submitted!"); //alert created
 			document.getElementById("add_landMarks_form").reset(); //reset form 
-			initialization(); // map re-populated with reports
+			addIcon(a);
+//			initialization(); // map re-populated with reports
 			},
 			error: function(xhr, status, error) {
 				alert("Status: " + status + "\nError: " + error);
@@ -350,6 +357,22 @@ function createReport(event){
 } // end of createReport function 
 
 $("#add_landMarks_form").on("submit",createReport);
+
+
+
+function addIcon(array){
+	
+	var requestData = {}; 	
+	
+	for (var i=0; i<array.length; i++){
+		
+		requestData[array[i].name] = array[i].value;
+	}
+	
+	clickMarker.setIcon(icons[requestData.type].icon);
+
+	clickMarker = null;
+}
 
 
 google.maps.event.addDomListener(window, 'load', initialization);
