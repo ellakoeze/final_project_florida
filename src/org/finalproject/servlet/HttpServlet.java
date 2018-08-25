@@ -148,6 +148,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 					m.put("type", res.getString("type"));
 					m.put("longitude", res.getString("long"));
 					m.put("latitude", res.getString("lat"));
+					m.put("name", res.getString("name"));
 					list.put(m);
 				}
 				

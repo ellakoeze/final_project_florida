@@ -121,31 +121,68 @@ function mapInitialization(landmarks) {
 		var type = e.type;
 		var landmarkType=(e['type']); // landmarkType empty string should be the string in the name var in index.jsp 
 		var latlng = new google.maps.LatLng(lat, long);     
+		
 		bounds.extend(latlng);
     
 		//create the content window information if needed
 		//add if loops to match the markers with the TYPE, NAME, Address??
 		//
+
+
 		// Create the infoWindow content
-		//    var contentStr = '<h4>Report Details</h4><hr>';
-		//    contentStr += '<p><b>' + 'Disaster' + ':</b>&nbsp' + e['disaster'] + '</p>';
-		//    contentStr += '<p><b>' + 'Report Type' + ':</b>&nbsp' + e['report_type'] + 
-		//      '</p>';
-		//    if (e['report_type'] == 'request' || e['report_type'] == 'donation') {
-		//      contentStr += '<p><b>' + 'Resource Type' + ':</b>&nbsp' + 
-		//        e['resource_type'] + '</p>';
-		//    }//end of if 
-		//    else if (e['report_type'] == 'damage') {
-		//      contentStr += '<p><b>' + 'Damage Type' + ':</b>&nbsp' + e['damage_type'] 
-		//        + '</p>';
-		//    }//end of else is
-		//    //reporter 
-		//    contentStr += '<p><b>' + 'Reporter' + ':</b>&nbsp' + e['first_name'] + '&nbsp' + e['last_name'] + '</p>';
-		//    contentStr += '<p><b>' + 'Timestamp' + ':</b>&nbsp' + 
-		//      e['time_stamp'].substring(0,19) + '</p>';
-		//    if ('message' in e){
-		//      contentStr += '<p><b>' + 'Message' + ':</b>&nbsp' + e['message'] + '</p>';
-		//    }//end of if
+		
+		    var contentStr = []
+//		    contentStr += '<p><b><i>' + e['type'] + '</i><b>&nbsp' +'</p>';
+		    
+		    //golf course
+		    if (e['type'] == 'golf_course') {
+		      contentStr =  '<p><b><i>' + 'Golf Course' + '</i><b>&nbsp' +'</p>';
+		      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+		    }//end of if  GC
+		    
+		    //National Park
+		    else if (e['type'] == 'national_park') {
+			      contentStr =  '<p><b><i>' + 'National Park' + '</i><b>&nbsp' +'</p>';
+			      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    }//end of if NP
+		    
+		    //state_local_park
+		    else if (e['type'] == 'state_local_park') {
+			      contentStr =  '<p><b><i>' + 'Florida State Park' + '</i><b>&nbsp' +'</p>';
+			      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    }//end of if state_local_park
+		    //Shopping Center
+		    else if (e['type'] == 'shopping_center') {
+			      contentStr =  '<p><b><i>' + 'Shopping Center' + '</i><b>&nbsp' +'</p>';
+			      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    }//end of if 
+		    //Shopping Center
+		    else if (e['type'] == 'nationa_forest_fed_land') {
+			      contentStr =  '<p><b><i>' + 'National Forest / Federal Land' + '</i><b>&nbsp' +'</p>';
+			      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    }//end of if 
+		    else {
+		    	contentStr = '<p><b><i>' + e['type'] + '</i><b>&nbsp' +'</p>';
+		    	contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+		    	
+		    };//end of else 
+		    
+//		    else if (e['report_type'] == 'damage') {
+//		      contentStr += '<p><b>' + 'Damage Type' + ':</b>&nbsp' + e['damage_type'] 
+//		        + '</p>';
+//		    }//end of else is
+//		    
+//		    //reporter 
+//		    contentStr += '<p><b>' + 'Reporter' + ':</b>&nbsp' + e['first_name'] + '&nbsp' + e['last_name'] + '</p>';
+//		    contentStr += '<p><b>' + 'Timestamp' + ':</b>&nbsp' + 
+//		      e['time_stamp'].substring(0,19) + '</p>';
+//		    if ('message' in e){
+//		      contentStr += '<p><b>' + 'Message' + ':</b>&nbsp' + e['message'] + '</p>';
+//		    }//end of if
+		   
+		   var infowindow = new google.maps.InfoWindow({
+			   customInfo: contentStr
+		      });
 		
 		if(type){
 
@@ -154,15 +191,16 @@ function mapInitialization(landmarks) {
 				position : latlng, // Position marker to coordinates
 				icon: icons[type].icon, //update icon image 
 				map : map,
-				type: type
-			//customInfo: contentStr, //content strings in above in the commented code above 
+				type: type,
+				customInfo: contentStr //content strings in above in the commented code above 
 			}); //end of marker VAR
 
 			// Add a Click Listener to the marker
 			google.maps.event.addListener(marker, 'click', function() { 
 				// use 'customInfo' to customize infoWindow
-				//infowindow.setContent(marker['customInfo']);
+				infowindow.setContent(marker['customInfo']);
 				infowindow.open(map, marker); // Open InfoWindow
+//				infowindow.close(map, marker); // close InfoWindow
 			}); //end of google maps event listener
   
 			markers.push(marker);
@@ -335,7 +373,7 @@ function createReport(event){
 	a=a.filter(function(item){return item.item !='';});
 	//console.log(place)
 	///look at jsp to grba ID and not the label 
-//	console.log(a);
+	console.log(a);
 	
 	//AJAX POST
 	$.ajax({ 
