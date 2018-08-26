@@ -108,8 +108,20 @@ function showLandMarks(selType) {
 } // end of showAllLandMarks
 
 function mapInitialization(landmarks) {
+	var myStyles =[
+	    {
+	        featureType: "poi",
+	        elementType: "labels",
+	        stylers: [
+	              { visibility: "off" }
+	        ]
+	    }
+	];
+
+	
 	var mapOptions = { 
 		mapTypeId : google.maps.MapTypeId.ROADMAP,
+		styles: myStyles,
         center: {lat: 28.18, lng: -81.5158}, //correct 
         zoom: 5
 		};// set the type of MAP	
