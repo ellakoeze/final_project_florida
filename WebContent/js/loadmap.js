@@ -49,6 +49,10 @@ var map;
 var clickMarker;
 var createLatLng;
 var markers = [];
+var contentStr = [];
+var infowindow = new google.maps.InfoWindow({
+	   customInfo: contentStr
+   });
 
 //these photo files align to the photos in the /img folder of the project. 
 var icons = {//img/image.png // file path once we decided the files  
@@ -126,12 +130,7 @@ function mapInitialization(landmarks) {
     
 		//create the content window information if needed
 		//add if loops to match the markers with the TYPE, NAME, Address??
-		//
-
-
 		// Create the infoWindow content
-		
-		    var contentStr = []
 //		    contentStr += '<p><b><i>' + e['type'] + '</i><b>&nbsp' +'</p>';
 		    
 		    //golf course
@@ -180,9 +179,9 @@ function mapInitialization(landmarks) {
 //		      contentStr += '<p><b>' + 'Message' + ':</b>&nbsp' + e['message'] + '</p>';
 //		    }//end of if
 		   
-		   var infowindow = new google.maps.InfoWindow({
-			   customInfo: contentStr
-		      });
+//		   var infowindow = new google.maps.InfoWindow({
+//			   customInfo: contentStr
+//		      });
 		
 		if(type){
 
@@ -197,11 +196,17 @@ function mapInitialization(landmarks) {
 
 			// Add a Click Listener to the marker
 			google.maps.event.addListener(marker, 'click', function() { 
+				infowindow.close();
 				// use 'customInfo' to customize infoWindow
 				infowindow.setContent(marker['customInfo']);
 				infowindow.open(map, marker); // Open InfoWindow
-//				infowindow.close(map, marker); // close InfoWindow
 			}); //end of google maps event listener
+			 
+			//Add a Click Listener to CLOSE
+			google.maps.event.addListener(map, 'click', function() { 
+				infowindow.close(); // close InfoWindow
+			}); //end of google maps event listener
+  
   
 			markers.push(marker);
 		}
@@ -234,7 +239,6 @@ function addMapMarker(button){
 	}
 	} //end of addMapMrker
 	
-	
 function placeMarkerAndPanTo(latLng, map) {
 	//console.log(marker.getPosition());
 	if(clickMarker){
@@ -251,11 +255,8 @@ function placeMarkerAndPanTo(latLng, map) {
 	return clickMarker;
 } // end of placeMarkerAndPanTo
 
-
-
 //event listener on side bar
 function filterMap(type, button){
-
 	if(!button.checked){
 		clearMap(type);
 	}
@@ -271,7 +272,6 @@ function filterMap(type, button){
 		        labels[i].classList.add("active");
 		    }
 		}
-		
 		// do ajax request
 		$.ajax({
 		    url: 'HttpServlet',
@@ -305,16 +305,55 @@ function addToMap(landmarks){
 	    		position : latlng, // Position marker to coordinates
 	    		icon: icons[type].icon, //update icon image 
 	    		map : map, 
-	    		type: type
-	    		//customInfo: contentStr, //content strings in above in the commented code above 
+	    		type: type,
+	    		customInfo: contentStr, //content strings in above in the commented code above 
 	    		}); 
+	    	
+		    if (e['type'] == 'golf_course') {
+			      contentStr =  '<p><b><i>' + 'Golf Course' + '</i><b>&nbsp' +'</p>';
+			      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    }//end of if  GC
+			    
+			    //National Park
+			    else if (e['type'] == 'national_park') {
+				      contentStr =  '<p><b><i>' + 'National Park' + '</i><b>&nbsp' +'</p>';
+				      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+				    }//end of if NP
+			    
+			    //state_local_park
+			    else if (e['type'] == 'state_local_park') {
+				      contentStr =  '<p><b><i>' + 'Florida State Park' + '</i><b>&nbsp' +'</p>';
+				      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+				    }//end of if state_local_park
+			    //Shopping Center
+			    else if (e['type'] == 'shopping_center') {
+				      contentStr =  '<p><b><i>' + 'Shopping Center' + '</i><b>&nbsp' +'</p>';
+				      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+				    }//end of if 
+			    //Shopping Center
+			    else if (e['type'] == 'nationa_forest_fed_land') {
+				      contentStr =  '<p><b><i>' + 'National Forest / Federal Land' + '</i><b>&nbsp' +'</p>';
+				      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+				    }//end of if 
+			    else {
+			    	contentStr = '<p><b><i>' + e['type'] + '</i><b>&nbsp' +'</p>';
+			    	contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    	
+			    };//end of else 
+	    	
+	    	console.log(newMarker)
 
 	    		// Add a Click Listener to the marker
 	    		google.maps.event.addListener(newMarker, 'click', function() { 
 	    			// use 'customInfo' to customize infoWindow
-	    			//infowindow.setContent(marker['customInfo']);
-	    			infowindow.open(map, marker); 
-	    		}); 
+	    			infowindow.setContent(newMarker['customInfo']);
+	    			infowindow.open(map, newMarker); 
+	    		});
+	    	google.maps.event.addListener(map, 'click', function() { 
+				infowindow.close(); // close InfoWindow
+			}); //end of google maps event listener
+
+				
 	    		markers.push(newMarker);
 	    }
 	}); // end of jquery
