@@ -49,6 +49,44 @@ var map;
 var clickMarker;
 var createLatLng;
 var markers = [];
+var contentStr = [];
+var infowindow = new google.maps.InfoWindow({
+	   customInfo: contentStr
+   });
+
+//these photo files align to the photos in the /img folder of the project. 
+var icons = {//img/image.png // file path once we decided the files  
+		airport: { 
+			icon: 'img/airport.png'
+				},
+		amusement: {
+			icon: 'img/amusement.png'
+				},
+		Beach: {
+			icon:'img/beach.png'
+				},
+		campground: {
+			icon: 'img/campground.png'
+				},
+		golf_course: {
+			icon: 'img/golf_course.png'
+				},
+		Hotel: {
+			icon:'img/Hotel.png'
+				},
+		nationa_forest_fed_land: {
+			icon: 'img/nationa_forest_fed_land.png'
+				},
+		national_park: {
+			icon:'img/national_park.png'
+				},
+		shopping_center: {
+			icon:'img/shopping_center.png'
+				},
+		state_local_park: {
+			icon:'img/state_local_park.png'
+				},
+  };//end of icon VAR
 
 function initialization() {
 	showLandMarks("all");
@@ -70,76 +108,123 @@ function showLandMarks(selType) {
 } // end of showAllLandMarks
 
 function mapInitialization(landmarks) {
+	var myStyles =[
+	    {
+	        featureType: "poi",
+	        elementType: "labels",
+	        stylers: [
+	              { visibility: "off" }
+	        ]
+	    }
+	];
+
+	
 	var mapOptions = { 
 		mapTypeId : google.maps.MapTypeId.ROADMAP,
+		styles: myStyles,
         center: {lat: 28.18, lng: -81.5158}, //correct 
-        zoom: 10
+        zoom: 5
 		};// set the type of MAP	
 
 	// Render the map within the empty div
 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 	var bounds = new google.maps.LatLngBounds ();
 
-	//need to be filled in 
-	var icons = {
-			beaches: { icon:''},//img/image.png // file path once we decided the files  
-			hotels: {icon:''},
-			airports: { icon:''},
-			nationalParks: {icon:''},
-			shoppingCenters: { icon:''},
-			campgrounds: {icon:''}
-	  };//end of icon VAR
-
 	//jquery function  
 	$.each(landmarks, function(i, e) {
 		var long = Number(e['longitude']);
 		var lat = Number(e['latitude']);
 		var type = e.type;
-		//var landmarkType=e['type']; // landmarkType empty string should be the string in the name var in index.jsp 
+		//var user_saved = e.user_saved;
+		var landmarkType=(e['type']); // landmarkType empty string should be the string in the name var in index.jsp 
 		var latlng = new google.maps.LatLng(lat, long);     
+		
 		bounds.extend(latlng);
     
 		//create the content window information if needed
 		//add if loops to match the markers with the TYPE, NAME, Address??
-		//
 		// Create the infoWindow content
-		//    var contentStr = '<h4>Report Details</h4><hr>';
-		//    contentStr += '<p><b>' + 'Disaster' + ':</b>&nbsp' + e['disaster'] + '</p>';
-		//    contentStr += '<p><b>' + 'Report Type' + ':</b>&nbsp' + e['report_type'] + 
-		//      '</p>';
-		//    if (e['report_type'] == 'request' || e['report_type'] == 'donation') {
-		//      contentStr += '<p><b>' + 'Resource Type' + ':</b>&nbsp' + 
-		//        e['resource_type'] + '</p>';
-		//    }//end of if 
-		//    else if (e['report_type'] == 'damage') {
-		//      contentStr += '<p><b>' + 'Damage Type' + ':</b>&nbsp' + e['damage_type'] 
-		//        + '</p>';
-		//    }//end of else is
-		//    //reporter 
-		//    contentStr += '<p><b>' + 'Reporter' + ':</b>&nbsp' + e['first_name'] + '&nbsp' + e['last_name'] + '</p>';
-		//    contentStr += '<p><b>' + 'Timestamp' + ':</b>&nbsp' + 
-		//      e['time_stamp'].substring(0,19) + '</p>';
-		//    if ('message' in e){
-		//      contentStr += '<p><b>' + 'Message' + ':</b>&nbsp' + e['message'] + '</p>';
-		//    }//end of if
+//		    contentStr += '<p><b><i>' + e['type'] + '</i><b>&nbsp' +'</p>';
+		    
+		    //golf course
+		    if (e['type'] == 'golf_course') {
+		      contentStr =  '<p><b><i>' + 'Golf Course' + '</i><b>&nbsp' +'</p>';
+		      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+		    }//end of if  GC
+		    
+		    //National Park
+		    else if (e['type'] == 'national_park') {
+			      contentStr =  '<p><b><i>' + 'National Park' + '</i><b>&nbsp' +'</p>';
+			      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    }//end of if NP
+		    
+		    //state_local_park
+		    else if (e['type'] == 'state_local_park') {
+			      contentStr =  '<p><b><i>' + 'Florida State Park' + '</i><b>&nbsp' +'</p>';
+			      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    }//end of if state_local_park
+		    //Shopping Center
+		    else if (e['type'] == 'shopping_center') {
+			      contentStr =  '<p><b><i>' + 'Shopping Center' + '</i><b>&nbsp' +'</p>';
+			      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    }//end of if 
+		    //National Forest
+		    else if (e['type'] == 'nationa_forest_fed_land') {
+			      contentStr =  '<p><b><i>' + 'National Forest / Federal Land' + '</i><b>&nbsp' +'</p>';
+			      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    }//end of if 
+		    else {
+		    	contentStr = '<p><b><i>' + e['type'] + '</i><b>&nbsp' +'</p>';
+		    	contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+		    	
+		    };//end of else
+		    contentStr += '<p><b>' + e['user_saved']+ '</b>&nbsp'+ '</p>';
+			contentStr += '<button onclick="saveLoc(1)">Save Location</button>';
+		    
+//		    else if (e['report_type'] == 'damage') {
+//		      contentStr += '<p><b>' + 'Damage Type' + ':</b>&nbsp' + e['damage_type'] 
+//		        + '</p>';
+//		    }//end of else is
+//		    
+//		    //reporter 
+//		    contentStr += '<p><b>' + 'Reporter' + ':</b>&nbsp' + e['first_name'] + '&nbsp' + e['last_name'] + '</p>';
+//		    contentStr += '<p><b>' + 'Timestamp' + ':</b>&nbsp' + 
+//		      e['time_stamp'].substring(0,19) + '</p>';
+//		    if ('message' in e){
+//		      contentStr += '<p><b>' + 'Message' + ':</b>&nbsp' + e['message'] + '</p>';
+//		    }//end of if
+		   
+//		   var infowindow = new google.maps.InfoWindow({
+//			   customInfo: contentStr
+//		      });
+		
+		if(type){
 
 		// Create the marker
-		var marker = new google.maps.Marker({ // Set the marker
-			position : latlng, // Position marker to coordinates
-			//icon: icons[landmarkType].icon, //update icon image 
-			map : map,
-			type: type
-			//customInfo: contentStr, //content strings in above in the commented code above 
-		}); //end of marker VAR
+			var marker = new google.maps.Marker({ // Set the marker
+				position : latlng, // Position marker to coordinates
+				icon: icons[type].icon, //update icon image 
+				map : map,
+				type: type,
+				customInfo: contentStr //content strings in above in the commented code above 
+			}); //end of marker VAR
 
-		// Add a Click Listener to the marker
-		google.maps.event.addListener(marker, 'click', function() { 
-			// use 'customInfo' to customize infoWindow
-			//infowindow.setContent(marker['customInfo']);
-			infowindow.open(map, marker); // Open InfoWindow
-		}); //end of google maps event listener
+			// Add a Click Listener to the marker
+			google.maps.event.addListener(marker, 'click', function() { 
+				infowindow.close();
+				// use 'customInfo' to customize infoWindow
+				infowindow.setContent(marker['customInfo']);
+				infowindow.open(map, marker); // Open InfoWindow
+			}); //end of google maps event listener
+			 
+			//Add a Click Listener to CLOSE
+			google.maps.event.addListener(map, 'click', function() { 
+				infowindow.close(); // close InfoWindow
+			}); //end of google maps event listener
   
-		markers.push(marker);
+  
+			markers.push(marker);
+		}
 	
 	});//end of JQUERY
 	
@@ -148,12 +233,95 @@ function mapInitialization(landmarks) {
 
 } //end of mapInitialization
 
+function saveLoc(saveValue){
+	//alert(typeof saveValue);
+	var val = saveValue.toString();
+	$.ajax({
+		    url: 'HttpServlet',
+		    type: 'POST',
+		    data: { "user_saved": val},
+		    success: function(data) { 
+		      alert("Hey!");
+		    },
+		    error: function(xhr, status, error) {
+		      alert("An AJAX error occured: " + status + "\nError: " + error);
+		    }
+		  });
+	
+}
+
+function exportLoc(landmarks){
+	var LocList = [];
+	
+	$.each(landmarks, function(i, e) {
+		if (e['type']=='golf_course'){
+			LocList.push(e);
+		}
+	});
+	//takes an array of objects and creates csv data
+	function convertArrayOfObjectsToCSV(args) {  
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+        data = args.data || null;
+        if (data == null || !data.length) {
+            return null;
+        }
+
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
+
+        keys = Object.keys(data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        data.forEach(function(item) {
+            ctr = 0;
+            keys.forEach(function(key) {
+                if (ctr > 0) result += columnDelimiter;
+
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+
+        return result;
+    }
+	//takes data and turns it into csv file for download
+	function downloadCSV(args) {  
+        var data, filename, link;
+        var csv = convertArrayOfObjectsToCSV({
+            data: LocList
+        });
+        if (csv == null) return;
+
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    }
+	
+	downloadCSV({filename: "Export-Locations.csv"});
+}
+
+
+
 function addMapMarker(button){
 	
 //	console.log(button.checked);
 	
 	if(button.checked){
 		clearMap("all");
+		document.getElementById("top-button").classList.remove("active");
 		document.getElementById("add-options").classList.add("active");
 		document.getElementById("addMarker-text").innerHTML = "Hide";
         var onClick = map.addListener('click', function(e) {
@@ -166,8 +334,7 @@ function addMapMarker(button){
 		document.getElementById("add-options").classList.remove("active");
 		document.getElementById("addMarker-text").innerHTML = "Add landmark";
 	}
-	} //end of addMapMrker
-	
+} //end of addMapMrker
 	
 function placeMarkerAndPanTo(latLng, map) {
 	//console.log(marker.getPosition());
@@ -181,16 +348,12 @@ function placeMarkerAndPanTo(latLng, map) {
 				draggable: true,
 				map: map
 				})
-			
 		}//end of else 
-
+	return clickMarker;
 } // end of placeMarkerAndPanTo
-
-
 
 //event listener on side bar
 function filterMap(type, button){
-
 	if(!button.checked){
 		clearMap(type);
 	}
@@ -206,8 +369,6 @@ function filterMap(type, button){
 		        labels[i].classList.add("active");
 		    }
 		}
-		
-		
 		// do ajax request
 		$.ajax({
 		    url: 'HttpServlet',
@@ -225,6 +386,39 @@ function filterMap(type, button){
 	}	
 } //filterMap
 
+function showSavedLoc(user_saved, button){
+	if(!button.checked){
+		clearMap(type);
+	}
+	else if(button.checked){
+		if(type == 'all'){
+			document.getElementById("all-text").innerHTML= "Clear map";
+			let buttons = document.getElementsByClassName("toggle");
+			for (var i = 0; i < buttons.length; i++) {
+		        buttons[i].checked = true;
+		    }
+			let labels = document.getElementsByClassName("btn-secondary");
+			for (var i = 0; i < labels.length; i++) {
+		        labels[i].classList.add("active");
+		    }
+		}
+		// do ajax request
+		$.ajax({
+		    url: 'HttpServlet',
+		    type: 'POST',
+		    data: { "tab_id": "1", "user_saved": user_saved},
+		    success: function(landmarks) { 
+		    
+		    //added function to call specific type that is selected from ShowLandMarks function above.
+		    addToMap(landmarks);
+		    },
+		    error: function(xhr, status, error) {
+		      alert("An AJAX error occured: " + status + "\nError: " + error);
+		    }
+		  });	
+	}	
+} //Show Saved Locations
+
 function addToMap(landmarks){ 
 	
 	var currentBounds = map.getBounds();
@@ -235,23 +429,63 @@ function addToMap(landmarks){
 	    var type = e.type;
 	    var latlng = new google.maps.LatLng(lat, long);  
 	    
-	    currentBounds.extend(latlng);
+	    if(type && latlng){
 	   
-	    var newMarker = new google.maps.Marker({ // Set the marker
-	    	  position : latlng, // Position marker to coordinates
-	    	  //icon: icons[landmarkType].icon, //update icon image 
-	    	  map : map, 
-	    	  type: type
-	    	  //customInfo: contentStr, //content strings in above in the commented code above 
-	    	}); 
+	    	var newMarker = new google.maps.Marker({ // Set the marker
+	    		position : latlng, // Position marker to coordinates
+	    		icon: icons[type].icon, //update icon image 
+	    		map : map, 
+	    		type: type,
+	    		customInfo: contentStr, //content strings in above in the commented code above 
+	    		}); 
+	    	
+		    if (e['type'] == 'golf_course') {
+			      contentStr =  '<p><b><i>' + 'Golf Course' + '</i><b>&nbsp' +'</p>';
+			      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    }//end of if  GC
+			    
+			    //National Park
+			    else if (e['type'] == 'national_park') {
+				      contentStr =  '<p><b><i>' + 'National Park' + '</i><b>&nbsp' +'</p>';
+				      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+				    }//end of if NP
+			    
+			    //state_local_park
+			    else if (e['type'] == 'state_local_park') {
+				      contentStr =  '<p><b><i>' + 'Florida State Park' + '</i><b>&nbsp' +'</p>';
+				      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+				    }//end of if state_local_park
+			    //Shopping Center
+			    else if (e['type'] == 'shopping_center') {
+				      contentStr =  '<p><b><i>' + 'Shopping Center' + '</i><b>&nbsp' +'</p>';
+				      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+				    }//end of if 
+			    //Shopping Center
+			    else if (e['type'] == 'nationa_forest_fed_land') {
+				      contentStr =  '<p><b><i>' + 'National Forest / Federal Land' + '</i><b>&nbsp' +'</p>';
+				      contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+				    }//end of if 
+			    else {
+			    	contentStr = '<p><b><i>' + e['type'] + '</i><b>&nbsp' +'</p>';
+			    	contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
+			    	
+			    };//end of else 
+	    	
+	    	console.log(newMarker)
 
-	    	// Add a Click Listener to the marker
-	    	google.maps.event.addListener(newMarker, 'click', function() { 
-	    	  // use 'customInfo' to customize infoWindow
-	    	  //infowindow.setContent(marker['customInfo']);
-	    	  infowindow.open(map, marker); 
-	    }); 
-	    markers.push(newMarker);
+	    		// Add a Click Listener to the marker
+	    		google.maps.event.addListener(newMarker, 'click', function() { 
+	    			// use 'customInfo' to customize infoWindow
+	    			infowindow.setContent(newMarker['customInfo']);
+	    			infowindow.open(map, newMarker); 
+	    		});
+	    	google.maps.event.addListener(map, 'click', function() { 
+				infowindow.close(); // close InfoWindow
+			}); //end of google maps event listener
+
+				
+	    		markers.push(newMarker);
+	    }
 	}); // end of jquery
 	
 	
@@ -293,34 +527,34 @@ function clearMap(type){
 
 } //end of map clearMap
 
-//id | name | type | lat | long | user_created | user_saved | notes 
 
 function createReport(event){
 	event.preventDefault();  // stop form from submitting normally
+	if (!clickMarker){
+		alert("please select a location");
+		return;
+	}
 	var a=$("#add_landMarks_form").serializeArray(); //Create the array | ID needs to be lower case and use _ UGHHH
 	a.push({name: "tab_id", value: "0"}); //add the tab_id to the array with a 0 value - indicating the landmark
-	
-	
-	
-	console.log(createLatLng) //this log is now working
-	
-	a.push({name: "tab_id", value: "0"});
-	a.push({name: "latitude", value: latLng.geometry.location.lat()});
-	a.push({name: "longitude", value: latLng.geometry.location.lng()});
+	a.push({name: "latitude", value: clickMarker.getPosition().lat()});
+	a.push({name: "longitude", value: clickMarker.getPosition().lng()});
 	//key : value assigned to var a
 	a=a.filter(function(item){return item.item !='';});
 	//console.log(place)
+	///look at jsp to grba ID and not the label 
+	console.log(a);
 	
 	//AJAX POST
 	$.ajax({ 
 		url: 'HttpServlet',
 		type: 'POST',
 		data: a,  
-		success: function(landmarks) {
-			//console.log(landmarks)
+		success: function(result) {
+//			console.log(result)
 			alert("Report submitted!"); //alert created
 			document.getElementById("add_landMarks_form").reset(); //reset form 
-			initialization(); // map re-populated with reports
+			addIcon(a);
+//			initialization(); // map re-populated with reports
 			},
 			error: function(xhr, status, error) {
 				alert("Status: " + status + "\nError: " + error);
@@ -330,6 +564,30 @@ function createReport(event){
 } // end of createReport function 
 
 $("#add_landMarks_form").on("submit",createReport);
+
+
+
+function addIcon(array){
+	
+	var requestData = {}; 	
+	
+	for (var i=0; i<array.length; i++){
+		
+		requestData[array[i].name] = array[i].value;
+	}
+	
+	clickMarker.setIcon(icons[requestData.type].icon);
+	clickMarker.type = requestData.type;
+	
+	var thisMarker = clickMarker;
+	
+	markers.push(thisMarker);
+	
+	clickMarker = null;
+	document.getElementById("add-button").classList.remove("active");
+	document.getElementById("add-options").classList.remove("active");
+	document.getElementById("addMarker-text").innerHTML = "Add landmark";
+}
 
 
 google.maps.event.addDomListener(window, 'load', initialization);
