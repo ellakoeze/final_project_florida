@@ -126,7 +126,7 @@
 						</div>
 						<button type="button" onclick="exportLoc(landmarks)">Export Saved Locations</button> 
 				</form>
-				</div> <!--  end of create report  -->
+				</div> <!--  endn of create report  -->
 
       <!-- Query Report Tab Panel -->
       <div class="tab-pane" id="addLandmarks">
