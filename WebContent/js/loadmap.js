@@ -178,7 +178,7 @@ function mapInitialization(landmarks) {
 		    	contentStr += '<p><b>' + e['name']+ '</b>&nbsp'+ '</p>';
 		    	
 		    };//end of else
-		    contentStr += '<p><b>' + e['user_saved']+ '</b>&nbsp'+ '</p>';
+		    //contentStr += '<p><b>' + e['user_saved']+ '</b>&nbsp'+ '</p>';
 			contentStr += '<button onclick="saveLoc(1)">Save Location</button>';
 		    
 //		    else if (e['report_type'] == 'damage') {
