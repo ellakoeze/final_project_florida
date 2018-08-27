@@ -16,7 +16,7 @@
  <!-- Google Map js libraries 29760d3ac55302c73ba7bcfcc8284fa9c402d51f-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=API_HERE&signed_in=true&libraries=places,visualization"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyDNq7JTLwDfN7p2NbA9NTwfsGke6dP6HnA&signed_in=true&libraries=places,visualization"></script>
 
 <!-- 
 =======
@@ -52,73 +52,79 @@
 		           
 		            <br></br>
 		            	<div class="btn-group-toggle" data-toggle="buttons">
-						  <label class="btn primary active">
+						  <label class="btn primary active" id="top-button">
 						    <input type="checkbox" autocomplete="off" onchange="filterMap('all', this)" > 
 						    <p id = "all-text">Clear map</p>
 						  </label>
 						</div>
-						
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="img/Airport-icon.png">
+						    <img src="img/airport.png"/>
 						  <label class="btn btn-secondary active">
-						    <input class ="toggle" type="checkbox" autocomplete="off" id="airport" onchange="filterMap('airport', this)"> Airport
+						    <input class ="toggle" value = "airport" type="checkbox" autocomplete="off" onchange="filterMap('airport', this)"> Airport
 						  </label>
 						</div>
 						
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="img/Airport-icon.png">
+						    <img src="img/amusement.png">
 						  <label class="btn btn-secondary active">
-						    <input class ="toggle" type="checkbox" autocomplete="off" onchange="filterMap('amusement', this)"> Amusement
+						    <input class ="toggle" value = "amusement" type="checkbox" autocomplete="off" onchange="filterMap('amusement', this)"> Amusement
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="/img/beach-icon.png">
+						    <img src="img/beach.png">
 						  <label class="btn btn-secondary active">
-						    <input  class ="toggle" type="checkbox" autocomplete="off" onchange="filterMap('Beach', this)"> Beach
+						    <input  class ="toggle" value = "Beach" type="checkbox" autocomplete="off" onchange="filterMap('Beach', this)"> Beach
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="/img/beach-icon.png">
+						    <img src="img/campground.png">
 						  <label class="btn btn-secondary active">
-						    <input class ="toggle" type="checkbox" autocomplete="off" onchange="filterMap('campground', this)"> Campground
+						    <input class ="toggle" value = "campground" type="checkbox" autocomplete="off" onchange="filterMap('campground', this)"> Campground
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="/img/beach-icon.png">
+						    <img src="img/golf_course.png">
 						  <label class="btn btn-secondary active">
-						    <input class ="toggle" type="checkbox" autocomplete="off" onchange="filterMap('golf_course', this)"> Golf Course
+						    <input class ="toggle" value = "golf_course" type="checkbox" autocomplete="off" onchange="filterMap('golf_course', this)"> Golf Course
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="/img/beach-icon.png">
+						    <img src="img/Hotel.png">
 						  <label class="btn btn-secondary active">
-						    <input class ="toggle" type="checkbox" autocomplete="off" onchange="filterMap('Hotel', this)"> Hotel
+						    <input class ="toggle" value = "Hotel" type="checkbox" autocomplete="off" onchange="filterMap('Hotel', this)"> Hotel
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="/img/beach-icon.png">
+						    <img src="img/nationa_forest_fed_land.png">
 						  <label class="btn btn-secondary active">
-						    <input class ="toggle" type="checkbox" autocomplete="off" onchange="filterMap('nationa_forest_fed_land', this)"> National Forest
+						    <input class ="toggle" value = "nationa_forest_fed_land" type="checkbox" autocomplete="off" onchange="filterMap('nationa_forest_fed_land', this)"> National Forest
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="/img/beach-icon.png">
+						    <img src="img/national_park.png">
 						  <label class="btn btn-secondary active">
-						    <input class ="toggle" type="checkbox" autocomplete="off" onchange="filterMap('national_park', this)"> National Park
+						    <input class ="toggle" value = "national_park" type="checkbox" autocomplete="off" onchange="filterMap('national_park', this)"> National Park
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						    <img src="/img/beach-icon.png">
+						    <img src="img/shopping_center.png">
 						  <label class="btn btn-secondary active">
-						    <input class ="toggle" type="checkbox" autocomplete="off" onchange="filterMap('shopping_center', this)"> Shopping Center
+						    <input class ="toggle" value = "shopping_center" type="checkbox" autocomplete="off" onchange="filterMap('shopping_center', this)"> Shopping Center
 						  </label>
 						</div>
 						<div class="btn-group-toggle" data-toggle="buttons">
-						  <img src="/img/beach-icon.png">
+						  <img src="img/state_local_park.png">
 						  <label class="btn btn-secondary active">
-						    <input class ="toggle" type="checkbox" autocomplete="off" onchange="filterMap('state_local_park', this)">State/Local Park
+						    <input class ="toggle" value = "state_local_park" type="checkbox" autocomplete="off" onchange="filterMap('state_local_park', this)">State/Local Park
 						  </label>
 						</div>
+						<div class="btn-group-toggle" data-toggle="buttons">
+						  <img src="img/star.png">
+						  <label class="btn btn-secondary active">
+						    <input class ="toggle" value = 1 type="checkbox" autocomplete="off" onchange="showSavedLoc(1, this)">Saved Locations
+						  </label>
+						</div>
+						<button type="button" onclick="exportLoc(landmarks)">Export Saved Locations</button> 
 				</form>
 				</div> <!--  end of create report  -->
 
@@ -128,7 +134,7 @@
             <br></br>
             
             <div class="btn-group-toggle" data-toggle="buttons">
-			<label class="btn primary add-button">
+			<label class="btn primary add-button" id="add-button">
 			<input type="checkbox" autocomplete="off" onchange="addMapMarker(this)" > 
 			<p id = "addMarker-text">Add A Landmark</p>
 			</label>
@@ -136,19 +142,20 @@
             
             <div id="add-options">
             	<p>Click on the map to place your landmark</p>
-            	<label>Landmark Type:</label>
-            	<select name="landmark_type">
-            		<option value="">Choose the Landmark Type:</option>
-            		<option value="Airport">Airport</option>
-            		<option value="Amusement">Amusement</option>
+            	<label>Select a Landmark:</label>
+            	<select name="type">
+            	<!-- do not change the value   -->
+            		<!-- <option value="">Choose the Landmark Type:</option> -->
+            		<option value="airport">Airport</option>
+            		<option value="amusement">Amusement</option>
             		<option value="Beach">Beach</option>
-            		<option value="Campground">Campground</option>
-            		<option value="GolfCourse">GolfCourse</option>
+            		<option value="campground">Campground</option>
+            		<option value="golf_course">GolfCourse</option>
             		<option value="Hotel">Hotel</option>
-            		<option value="Federal Land">Federal Land</option>
-            		<option value="National Park">National Park</option>
-            		<option value="Shopping Center">Shopping Center</option>
-            		<option value="State\Local Park">State\Local Park</option>                  
+            		<option value="nationa_forest_fed_land">Federal Land</option>
+            		<option value="national_park">National Park</option>
+            		<option value="shopping_center">Shopping Center</option>
+            		<option value="state_local_park">State or Local Park</option>                  
             	</select>
   			<div>
   			<label>Name of Landmark:&nbsp</label><input placeholder="Name of Venue, Place, Park, &  etc..." name="LandMark Name"></div>
